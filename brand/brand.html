@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UNMINDY — Brand</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --black:#171717; --white:#ffffff; --gray600:#4d4d4d; --gray500:#666666;
+    --gray400:#808080; --gray100:#ebebeb; --gray50:#fafafa;
+    --ring:0 0 0 1px rgba(0,0,0,.08); --ring-light:0 0 0 1px rgba(255,255,255,.14);
+    --focus:hsla(212,100%,48%,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    font-feature-settings:"liga";-webkit-font-smoothing:antialiased;color:var(--black);background:var(--white);}
+  .page{max-width:880px;margin:0 auto;padding:64px 24px 96px}
+  .kicker{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray500);margin-bottom:14px}
+  h1.page-title{font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+  .lede{font-size:18px;color:var(--gray600);margin-top:14px;max-width:52ch;line-height:1.56}
+  section{margin-top:64px}
+  .sec-head{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray500);
+    margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gray100)}
+
+  /* ---- Primary lockup ---- */
+  .lockup{display:flex;align-items:center;gap:20px;padding:56px 40px;background:var(--white);
+    border-radius:12px;box-shadow:var(--ring)}
+  .lockup .wm{font-size:44px;font-weight:600;letter-spacing:-.032em;color:var(--black)}
+  .mark{width:56px;height:56px;color:var(--black);display:block}
+
+  /* ---- Inverted ---- */
+  .lockup.dark{background:var(--black);box-shadow:var(--ring-light)}
+  .lockup.dark .wm,.lockup.dark .mark{color:var(--white)}
+
+  /* ---- Icon sizes ---- */
+  .sizes{display:flex;align-items:flex-end;gap:36px;flex-wrap:wrap;
+    padding:40px;background:var(--gray50);border-radius:12px;box-shadow:var(--ring)}
+  .size{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--black)}
+  .size span{font-size:12px;color:var(--gray500);font-variant-numeric:tabular-nums}
+
+  /* ---- Wordmark ---- */
+  .wordmarks{display:grid;gap:16px}
+  .wm-row{display:flex;align-items:center;padding:26px 32px;border-radius:10px;box-shadow:var(--ring)}
+  .wm-row .wm{font-weight:600;letter-spacing:-.032em}
+  .wm-a{background:var(--white);}.wm-a .wm{font-size:34px;color:var(--black)}
+  .wm-b{background:var(--black);}.wm-b .wm{font-size:34px;color:var(--white)}
+  .wm-c{background:var(--gray50);}.wm-c .wm{font-size:22px;color:var(--gray600)}
+
+  /* ---- Palette ---- */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .sw{border-radius:10px;box-shadow:var(--ring);overflow:hidden}
+  .sw .chip{height:84px}
+  .sw .meta{padding:12px 14px;font-size:12px;color:var(--gray600)}
+  .sw .meta b{display:block;font-family:'Geist Mono',monospace;font-size:12px;color:var(--black);margin-bottom:3px}
+
+  /* ---- Usage ---- */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .rule{padding:20px 22px;border-radius:10px;box-shadow:var(--ring);font-size:14px;color:var(--gray600);line-height:1.5}
+  .rule b{display:block;color:var(--black);font-size:13px;margin-bottom:6px;letter-spacing:.01em}
+  .rule.do b::before{content:"✓  ";color:var(--black)}
+  .rule.dont b::before{content:"✕  ";color:var(--gray500)}
+  @media (max-width:560px){
+    .page{padding:40px 18px 64px} h1.page-title{font-size:30px}
+    .lockup{padding:36px 22px;gap:14px}.lockup .wm{font-size:32px}.mark{width:42px;height:42px}
+    .rules{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="kicker">Brand · v1</div>
+    <h1 class="page-title">UNMINDY</h1>
+    <p class="lede">Lock in. The mark is a reticle — a crosshair you aim and fire. Monochrome, geometric, built to stay legible from a billboard down to a 16px favicon.</p>
+
+    <section>
+      <div class="sec-head">Primary lockup</div>
+      <div class="lockup">
+        <svg class="mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/>
+          <line x1="50" y1="4"  x2="50" y2="22" stroke="currentColor" stroke-width="5"/>
+          <line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/>
+          <line x1="4"  y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/>
+          <line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/>
+          <circle cx="50" cy="50" r="5.5" fill="currentColor"/>
+        </svg>
+        <span class="wm">UNMINDY</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">On dark</div>
+      <div class="lockup dark">
+        <svg class="mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/>
+          <line x1="50" y1="4"  x2="50" y2="22" stroke="currentColor" stroke-width="5"/>
+          <line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/>
+          <line x1="4"  y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/>
+          <line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/>
+          <circle cx="50" cy="50" r="5.5" fill="currentColor"/>
+        </svg>
+        <span class="wm">UNMINDY</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">Mark — legibility at every size</div>
+      <div class="sizes">
+        <div class="size"><svg class="mark" style="width:128px;height:128px" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/><line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/><line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/><line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/><line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg><span>128</span></div>
+        <div class="size"><svg class="mark" style="width:64px;height:64px" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/><line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/><line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/><line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/><line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg><span>64</span></div>
+        <div class="size"><svg class="mark" style="width:48px;height:48px" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/><line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/><line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/><line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/><line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg><span>48</span></div>
+        <div class="size"><svg class="mark" style="width:32px;height:32px" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/><line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/><line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/><line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/><line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg><span>32</span></div>
+        <div class="size"><svg class="mark" style="width:16px;height:16px" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/><line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/><line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/><line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/><line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="5.5" fill="currentColor"/></svg><span>16</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">Wordmark</div>
+      <div class="wordmarks">
+        <div class="wm-row wm-a"><span class="wm">UNMINDY</span></div>
+        <div class="wm-row wm-b"><span class="wm">UNMINDY</span></div>
+        <div class="wm-row wm-c"><span class="wm">UNMINDY</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">Color system</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#171717"></div><div class="meta"><b>#171717</b>Vercel Black · text, mark, primary button</div></div>
+        <div class="sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid #ebebeb"></div><div class="meta"><b>#FFFFFF</b>Page background</div></div>
+        <div class="sw"><div class="chip" style="background:#4d4d4d"></div><div class="meta"><b>#4D4D4D</b>Secondary text</div></div>
+        <div class="sw"><div class="chip" style="background:#ebebeb"></div><div class="meta"><b>#EBEBEB</b>Borders, dividers</div></div>
+        <div class="sw"><div class="chip" style="background:hsl(212,100%,48%)"></div><div class="meta"><b>hsl(212,100%,48%)</b>Focus / active only</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">Usage</div>
+      <div class="rules">
+        <div class="rule do"><b>Keep it monochrome</b>Black or white only. The mark adapts via currentColor.</div>
+        <div class="rule do"><b>Give it clear space</b>At least the dot's width around the mark on every side.</div>
+        <div class="rule do"><b>Use Geist, weight 600</b>Wordmark tracks tight (−0.03em). Never bold 700.</div>
+        <div class="rule dont"><b>Don't recolor the mark</b>No gradients, no accent fills on the reticle.</div>
+        <div class="rule dont"><b>Don't stretch or rotate</b>Keep it on the square grid, unskewed.</div>
+        <div class="rule dont"><b>Don't add a tagline inside</b>The lockup stays clean — copy lives beside it.</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

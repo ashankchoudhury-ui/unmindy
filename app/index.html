@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>UNMINDY — Lock in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Input Screen -->
+    <div id="screen-input" class="screen active">
+      <div class="screen-inner">
+        <div class="app-header">
+          <svg class="app-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/>
+            <line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/>
+            <line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/>
+            <line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/>
+            <line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/>
+            <circle cx="50" cy="50" r="5.5" fill="currentColor"/>
+          </svg>
+          <span class="app-name">UNMINDY</span>
+        </div>
+
+        <div class="streak-badge">
+          <span class="streak-dot"></span>
+          <span>Streak</span>
+          <span class="streak-count" id="streak-display">0</span>
+        </div>
+
+        <h1 class="app-title">What are you avoiding right now?</h1>
+        <p class="app-subtitle">One tiny step. Two minutes. That's all it takes to start.</p>
+
+        <div class="input-area">
+          <textarea
+            id="task-input"
+            class="task-input"
+            placeholder="Finish the essay… · fix the bug… · send the message… · study the chapter…"
+            rows="3"
+          ></textarea>
+          <button class="btn btn-primary btn-full" id="generate-btn">
+            Give me the one tiny step
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step + Timer Screen -->
+    <div id="screen-step" class="screen">
+      <div class="screen-inner">
+        <div class="app-header">
+          <svg class="app-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="5"/>
+            <line x1="50" y1="4" x2="50" y2="22" stroke="currentColor" stroke-width="5"/>
+            <line x1="50" y1="78" x2="50" y2="96" stroke="currentColor" stroke-width="5"/>
+            <line x1="4" y1="50" x2="22" y2="50" stroke="currentColor" stroke-width="5"/>
+            <line x1="78" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="5"/>
+            <circle cx="50" cy="50" r="5.5" fill="currentColor"/>
+          </svg>
+          <span class="app-name">UNMINDY</span>
+        </div>
+
+        <div class="task-label" id="task-label">Starting: —</div>
+
+        <div class="step-label">Your 2-minute first step</div>
+        <div class="step-card" id="step-text">—</div>
+
+        <div class="alt-step">
+          <button class="btn btn-ghost btn-small" id="alt-step-btn">Give me another →</button>
+        </div>
+
+        <div class="timer-area">
+          <div class="timer-ring">
+            <svg class="ring-svg" viewBox="0 0 190 190" aria-hidden="true">
+              <circle class="ring-track" cx="95" cy="95" r="82"/>
+              <circle class="ring-fill" id="ring-fill" cx="95" cy="95" r="82"/>
+            </svg>
+            <div class="ring-center">
+              <div class="timer-display" id="timer-display">2:00</div>
+              <div class="timer-label" id="timer-label">ready</div>
+            </div>
+          </div>
+          <p class="timer-hint" id="timer-hint">
+            Two minutes. Ugly counts. You can stop when it beeps — but you probably won't.
+          </p>
+          <button class="btn btn-primary btn-full" id="start-timer-btn">Start now</button>
+          <button class="btn btn-ghost btn-full hidden" id="back-btn">← Change the task</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Done Screen -->
+    <div id="screen-done" class="screen">
+      <div class="screen-inner">
+        <div class="done-badge">✓ You started</div>
+        <h1 class="done-title">The hard part is over.</h1>
+        <p class="done-subtitle">Starting is the thing everyone skips. You just did it — momentum's yours now.</p>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-number" id="today-count">0</div>
+            <div class="stat-label">starts today</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="streak-count">0</div>
+            <div class="stat-label">day streak</div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-full" id="again-btn" style="margin-top:28px">Do another</button>
+        <div class="reset-link" id="reset-stats">clear my stats</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

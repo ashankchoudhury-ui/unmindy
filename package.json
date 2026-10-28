@@ -1,0 +1,14 @@
+{
+  "name": "unmindy",
+  "version": "1.0.0",
+  "description": "UNMINDY — scroll-interrupt + lock-in commitment app",
+  "private": true,
+  "scripts": {
+    "dev:landing": "open landing/index.html",
+    "dev:app": "open app/index.html",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "keywords": ["unmindy", "productivity", "scroll-interrupt", "commitment"],
+  "author": "Ashank",
+  "license": "MIT"
+}
