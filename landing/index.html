@@ -124,12 +124,8 @@
       display: flex; justify-content: space-between; align-items: center;
     }
 
-    .nav-logo {
-      font-size: 1rem; font-weight: 800;
-      letter-spacing: 0.08em;
-    }
-
-    .nav-logo span { color: var(--text); }
+    .nav-logo { line-height: 0; }
+    .nav-logo img { height: 20px; width: auto; display: block; }
 
     .nav-cta {
       font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
@@ -569,7 +565,9 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">UNMIN<span>DY</span></a>
+      <a href="#" class="nav-logo">
+        <img src="assets/unmindy-logo.svg" alt="UNMINDY" width="120" height="24" />
+      </a>
       <a href="#cta" class="nav-cta">Join waitlist</a>
     </div>
   </nav>
