@@ -5,7 +5,7 @@
       .word { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 800; font-size: 72px; letter-spacing: -2.5px; fill: #f5f5f5; }
     </style>
   </defs>
-  <rect x="2" y="10" width="12" height="48" rx="3" class="bars"/>
-  <rect x="24" y="10" width="12" height="48" rx="3" class="bars"/>
+  <rect x="2" y="14" width="12" height="44" rx="3" class="bars"/>
+  <rect x="24" y="14" width="12" height="44" rx="3" class="bars"/>
   <text x="58" y="62" class="word">UNMINDY</text>
 </svg>
