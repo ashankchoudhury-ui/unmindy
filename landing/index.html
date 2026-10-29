@@ -395,9 +395,9 @@
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      gap: 2px;
+      background: #2a2a2a;
+      border: 1px solid #2a2a2a;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -552,7 +552,8 @@
       .btn-primary, .btn-ghost { flex: 1; justify-content: center; }
       .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
       .moment-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .steps { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 2px; }
+      .step { padding: 2.5rem 1.5rem; }
       .cta-form { flex-direction: column; }
       section { padding-block: 5rem; }
       .problem, .how, .moment, .cta { padding-block: 6rem; }
