@@ -305,11 +305,31 @@
     .lockin-task { font-size: 0.9rem; font-weight: 500; color: var(--text-dim); }
     .lockin-label { font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
 
-    /* ===== DIVIDER ===== */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    /* ===== SECTION SPACING ===== */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    section {
+      padding-block: 9rem;
+    }
+
+    .problem,
+    .how,
+    .moment,
+    .cta {
+      padding-block: 10rem;
+    }
+
+    @media (max-width: 768px) {
+      section { padding-block: 5rem; }
+      .problem, .how, .moment, .cta { padding-block: 6rem; }
+    }
 
     /* ===== PROBLEM ===== */
-    .problem { padding-block: 7rem; }
+    .problem { padding-block: 10rem; }
 
     .problem-grid {
       display: grid;
@@ -367,7 +387,7 @@
     }
 
     /* ===== HOW IT WORKS ===== */
-    .how { padding-block: 7rem; }
+    .how { padding-block: 10rem; }
 
     .how-header { margin-bottom: 5rem; }
 
@@ -409,7 +429,7 @@
     }
 
     /* ===== MOMENT ===== */
-    .moment { padding-block: 7rem; }
+    .moment { padding-block: 10rem; }
 
     .moment-grid {
       display: grid;
@@ -529,8 +549,8 @@
       .moment-grid { grid-template-columns: 1fr; gap: 3rem; }
       .steps { grid-template-columns: 1fr; }
       .cta-form { flex-direction: column; }
-      section { padding-block: 4rem; }
-      .how, .moment, .problem, .cta { padding-block: 5rem; }
+      section { padding-block: 5rem; }
+      .problem, .how, .moment, .cta { padding-block: 6rem; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -584,7 +604,7 @@
           <div class="interrupt-overlay" id="interruptOverlay">
             <h3>Scrolling again?</h3>
             <p>Lock in for 15 minutes.<br />Get back to work.</p>
-            <button class="lock-btn" id="lockBtn">Lock me in</button>
+            <button class="lock-btn" id="lockBtn" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">Lock me in</button>
           </div>
 
           <div class="lockin-screen" id="lockinScreen">
@@ -708,7 +728,7 @@
                 <div class="interrupt-overlay visible" id="momentOverlay">
                   <h3>Scrolling again?</h3>
                   <p>Lock in for 15 minutes.<br />Get back to work.</p>
-                  <button class="lock-btn">Lock me in</button>
+                  <button class="lock-btn" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">Lock me in</button>
                 </div>
               </div>
             </div>
