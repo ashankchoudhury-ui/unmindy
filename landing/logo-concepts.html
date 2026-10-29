@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNMINDY — Logo Concepts</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #f5f5f5;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 4rem 2rem;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .subhead {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 4rem;
+      max-width: 50rem;
+      line-height: 1.7;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2px;
+      background: #2a2a2a;
+      border: 2px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card {
+      background: #000;
+      padding: 4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      gap: 2rem;
+    }
+    .card-preview {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .card-meta {
+      text-align: center;
+    }
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+    .card-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #f5f5f5;
+    }
+    .note {
+      margin-top: 4rem;
+      color: #555;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 50rem;
+    }
+    .note strong { color: #f5f5f5; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Logo concepts</h1>
+    <p class="subhead">Six directions for UNMINDY. Each designed to work at 16px in a nav, 512px as an app icon, and everything between. Pure B&W.</p>
+
+    <div class="grid">
+
+      <!-- 01: The Break -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 420 120" width="420" height="120">
+            <defs>
+              <style>
+                .thin { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 84px; letter-spacing: -2px; fill: #f5f5f5; }
+                .bold { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 84px; letter-spacing: -3px; fill: #f5f5f5; }
+              </style>
+            </defs>
+            <text x="0" y="92" class="thin">UN</text>
+            <text x="158" y="92" class="bold">MINDY</text>
+            <line x1="172" y1="28" x2="195" y2="88" stroke="#f5f5f5" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">01</div>
+          <div class="card-name">The Break</div>
+        </div>
+      </div>
+
+      <!-- 02: The Lock Form -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 440 120" width="440" height="120">
+            <defs>
+              <style>
+                .word { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 80px; letter-spacing: -2.5px; fill: #f5f5f5; }
+              </style>
+            </defs>
+            <path d="M0 90 L0 40 L40 40 L40 90" fill="none" stroke="#f5f5f5" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M10 40 V28a18 18 0 0 1 36 0v12" fill="none" stroke="#f5f5f5" stroke-width="7" stroke-linecap="round"/>
+            <text x="80" y="88" class="word">UNMINDY</text>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">02</div>
+          <div class="card-name">The Lock Form</div>
+        </div>
+      </div>
+
+      <!-- 03: The Pause Bars -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 420 120" width="420" height="120">
+            <defs>
+              <style>
+                .word { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 80px; letter-spacing: -2.5px; fill: #f5f5f5; }
+              </style>
+            </defs>
+            <rect x="8" y="24" width="14" height="72" rx="3" fill="#f5f5f5"/>
+            <rect x="32" y="24" width="14" height="72" rx="3" fill="#f5f5f5"/>
+            <text x="72" y="88" class="word">UNMINDY</text>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">03</div>
+          <div class="card-name">The Pause Bars</div>
+        </div>
+      </div>
+
+      <!-- 04: The Frame -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 420 120" width="420" height="120">
+            <defs>
+              <style>
+                .word { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 76px; letter-spacing: -2px; fill: #f5f5f5; }
+              </style>
+            </defs>
+            <rect x="0" y="6" width="108" height="108" rx="24" fill="none" stroke="#f5f5f5" stroke-width="5"/>
+            <text x="132" y="92" class="word">UNMINDY</text>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">04</div>
+          <div class="card-name">The Frame</div>
+        </div>
+      </div>
+
+      <!-- 05: The Cut -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 400 120" width="400" height="120">
+            <defs>
+              <style>
+                .word { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 80px; letter-spacing: -2.5px; fill: #f5f5f5; }
+                .dim { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 80px; letter-spacing: -2.5px; fill: #2a2a2a; }
+              </style>
+            </defs>
+            <text x="0" y="88" class="dim">UNMIND</text>
+            <text x="0" y="88" class="word">UNMINDY</text>
+            <line x1="274" y1="34" x2="315" y2="34" stroke="#f5f5f5" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">05</div>
+          <div class="card-name">The Cut</div>
+        </div>
+      </div>
+
+      <!-- 06: The Signal -->
+      <div class="card">
+        <div class="card-preview">
+          <svg viewBox="0 0 400 120" width="400" height="120">
+            <defs>
+              <style>
+                .word { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 80px; letter-spacing: -2.5px; fill: #f5f5f5; }
+              </style>
+            </defs>
+            <circle cx="40" cy="60" r="30" fill="none" stroke="#f5f5f5" stroke-width="5"/>
+            <line x1="18" y1="60" x2="62" y2="60" stroke="#f5f5f5" stroke-width="5" stroke-linecap="round"/>
+            <text x="90" y="88" class="word">UNMINDY</text>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-label">06</div>
+          <div class="card-name">The Signal</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="note">
+      <strong>Pick a direction:</strong> 01 The Break, 02 The Lock Form, 03 The Pause Bars, 04 The Frame, 05 The Cut, 06 The Signal.<br />
+      Tell me which number, and what to change — mark size, lock weight, bar thickness, wordmark spacing, icon integration, stacked vs horizontal, monochrome only.
+    </p>
+  </div>
+</body>
+</html>
