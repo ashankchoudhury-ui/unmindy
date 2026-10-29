@@ -21,8 +21,6 @@
       --text: #f5f5f5;
       --text-dim: #555;
       --text-faint: #333;
-      --teal: #0d9488;
-      --teal-glow: rgba(13, 148, 136, 0.15);
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -79,7 +77,7 @@
       max-width: 32rem;
     }
 
-    .teal { color: var(--teal); }
+    .teal { color: var(--text); }
 
     /* ===== BUTTONS ===== */
     .btn {
@@ -92,7 +90,7 @@
       transition: all 0.2s ease;
     }
 
-    .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+    .btn:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 
     .btn-primary {
       background: var(--text);
@@ -131,7 +129,7 @@
       letter-spacing: 0.08em;
     }
 
-    .nav-logo span { color: var(--teal); }
+    .nav-logo span { color: var(--text); }
 
     .nav-cta {
       font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
@@ -249,7 +247,7 @@
     /* Interrupt */
     .interrupt-overlay {
       position: absolute; inset: 0;
-      background: var(--teal);
+      background: #f5f5f5;
       border-radius: 26px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -268,7 +266,7 @@
     .interrupt-overlay p { font-size: 0.85rem; color: #000; opacity: 0.65; line-height: 1.5; }
 
     .lock-btn {
-      background: #000; color: var(--teal);
+      background: #000; color: #f5f5f5;
       padding: 0.7rem 1.6rem;
       border-radius: 999px;
       font-weight: 700; font-size: 0.85rem;
@@ -297,7 +295,7 @@
     .lockin-timer {
       font-size: 3rem;
       font-weight: 900;
-      color: var(--teal);
+      color: var(--text);
       font-variant-numeric: tabular-nums;
       letter-spacing: -0.03em;
     }
@@ -466,7 +464,7 @@
     .cta::before {
       content: "";
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 50% 50% at 50% 50%, var(--teal-glow) 0%, transparent 70%);
+      background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -507,7 +505,7 @@
 
     .email-input:focus {
       border-color: #333;
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.08);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
     }
 
     .email-input::placeholder { color: var(--text-faint); }
@@ -515,7 +513,7 @@
     .success-msg {
       display: none;
       padding: 1rem;
-      color: var(--teal);
+      color: var(--text);
       font-weight: 600;
       margin-top: 1rem;
       font-size: 0.9rem;
@@ -625,7 +623,7 @@
     <div class="container hero-inner">
       <h1 class="hero-title fade-up">
         <span class="line">Break the</span>
-        <span class="line"><span class="teal">scroll.</span></span>
+        <span class="line">scroll.</span>
         <span class="line">Lock in.</span>
       </h1>
 
@@ -685,7 +683,7 @@
     <div class="container">
       <div class="how-header fade-up">
         <p class="label" style="margin-bottom: 1.5rem;">How it works</p>
-        <h2 class="display-lg">Three steps from<br />scroll to <span class="teal">start</span>.</h2>
+        <h2 class="display-lg">Three steps from<br />scroll to start.</h2>
         <p class="subhead" style="margin-top: 1.5rem;">
           No login. No to-do list. No guilt. Just a circuit-breaker between you and the scroll.
         </p>
@@ -723,7 +721,7 @@
             Your finger reaches for the scroll before your brain catches up. UNMINDY is already there.
           </h2>
           <p class="subhead">
-            The interrupt appears in under a second. A full-screen teal overlay with one question. You either commit or keep scrolling.
+            A full-screen light overlay with one question. You either commit or keep scrolling.
           </p>
         </div>
 
@@ -751,7 +749,7 @@
     <div class="container cta-inner">
       <div class="fade-up">
         <p class="label" style="margin-bottom: 1.5rem;">Join the waitlist</p>
-        <h2 class="cta-title">Stop saying <span class="teal">later.</span></h2>
+        <h2 class="cta-title">Stop saying later.</h2>
         <p class="cta-desc">Leave your email. We'll reach out when it's ready — no spam, no noise, just the work.</p>
 
         <form id="waitlistForm" class="cta-form">
