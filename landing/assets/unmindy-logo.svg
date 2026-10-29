@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" width="400" height="80">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80">
   <defs>
     <style>
-      .logo-text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 900; font-size: 56px; letter-spacing: -0.03em; fill: #f5f5f5; }
-      .logo-dot { fill: #f5f5f5; }
+      .bars { fill: #f5f5f5; }
+      .word { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 800; font-size: 72px; letter-spacing: -2.5px; fill: #f5f5f5; }
     </style>
   </defs>
-  <text x="0" y="62" class="logo-text">UNMINDY</text>
-  <!-- Interrupt dot above I -->
-  <circle cx="142" cy="28" r="4" class="logo-dot"/>
+  <rect x="2" y="10" width="12" height="56" rx="3" class="bars"/>
+  <rect x="24" y="10" width="12" height="56" rx="3" class="bars"/>
+  <text x="58" y="62" class="word">UNMINDY</text>
 </svg>
