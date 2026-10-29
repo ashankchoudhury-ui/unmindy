@@ -1,268 +1,628 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- SEO Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="UNMINDY catches the autopilot scroll within 3 seconds, asks one honest question, and locks your phone into the task you've been avoiding." />
   <meta name="theme-color" content="#000000" />
   <title>UNMINDY — Break the scroll. Lock in the work.</title>
 
-  <!-- Inter Font (Modern Dark Cinema system) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
-    /* ===== CSS Custom Properties (Dark Cinema: Teal + Orange) ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       --bg: #000000;
-      --bg-offset: #0a0a0a;
-      --text: #f8f9fa;
-      --text-secondary: #94a3ac;
-      --text-tertiary: #64748b;
-      --primary: #0d9488;
-      --accent: #ea580c;
-      --border: #1e293b;
-      --border-strong: #334155;
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --bg-elev: #030303;
+      --bg-card: #080808;
+      --border: #1a1a1a;
+      --border-hover: #2a2a2a;
+      --text: #f5f5f5;
+      --text-dim: #7a7a7a;
+      --text-faint: #4a4a4a;
+      --teal: #0d9488;
+      --teal-bright: #14b8a6;
+      --teal-glow: rgba(13, 148, 136, 0.18);
+      --orange: #ea580c;
+      --orange-glow: rgba(234, 88, 12, 0.15);
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* ===== Base ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 4rem;
-      font-size: 16px;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      html { scroll-behavior: smooth; }
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img { max-width: 100%; display: block; }
 
-    .visually-hidden {
-      position: absolute !important; width: 1px !important; height: 1px !important;
-      padding: 0 !important; margin: -1px !important; overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important;
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap;
     }
 
-    /* ===== Layout ===== */
-    .container { width: min(90%, 1200px); margin-inline: auto; padding-block: 4rem; }
-    @media (max-width: 768px) { .container { padding-block: 2.5rem; } }
+    .container { width: min(92%, 1200px); margin-inline: auto; }
+    section { padding-block: clamp(5rem, 10vw, 9rem); }
 
-    section { padding-block: 6rem; }
-    @media (max-width: 768px) { section { padding-block: 4rem; } }
+    /* ===== TYPOGRAPHY ===== */
+    .display-xl {
+      font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+    }
 
-    .center { text-align: center; max-width: 42rem; margin-inline: auto; }
+    .display-lg {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
 
-    /* ===== Typography Scale (Inter System) ===== */
-    .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
-    .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
-    .subhead { font-size: clamp(1.0625rem, 1.5vw, 1.375rem); font-weight: 500; line-height: 1.6; }
-    .body { font-size: 1rem; font-weight: 400; line-height: 1.6; }
-    .small { font-size: 0.875rem; font-weight: 400; line-height: 1.5; }
-    .stat-big { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; font-variant-numeric: tabular-nums; }
+    .headline {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
 
-    /* ===== Text colors ===== */
-    .t-primary { color: var(--primary); }
-    .t-accent { color: var(--accent); }
-    .t-secondary { color: var(--text-secondary); }
-    .t-tertiary { color: var(--text-tertiary); }
+    .subhead {
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      color: var(--text-dim);
+      line-height: 1.75;
+      max-width: 38rem;
+    }
 
-    /* ===== Buttons ===== */
+    .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal-bright);
+    }
+
+    .accent { color: var(--orange); }
+    .teal-text { color: var(--teal-bright); }
+
+    /* ===== BUTTONS ===== */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      border: none; border-radius: 10px; font-weight: 500; font-size: 0.95rem;
-      cursor: pointer; padding: 0.875rem 2rem; min-height: 48px;
-      transition: opacity 0.15s ease, transform 0.15s ease;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-    .btn-primary { background: var(--accent); color: #000; }
-    .btn-primary:hover { opacity: 0.9; }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-outline {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { opacity: 0.7; }
 
-    /* ===== Navigation ===== */
+    .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 0 50px var(--orange-glow), 0 0 0 1px rgba(234, 88, 12, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 70px rgba(234, 88, 12, 0.25), 0 0 0 1px rgba(234, 88, 12, 0.5);
+    }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-ghost {
+      color: var(--text);
+      border: 1px solid var(--border-hover);
+      backdrop-filter: blur(10px);
+    }
+    .btn-ghost:hover { background: #f5f5f5; color: #000; border-color: #f5f5f5; }
+
+    /* ===== NAV ===== */
     .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
-      background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
-    }
-    .nav-brand { font-size: 1.125rem; font-weight: 700; color: var(--primary); }
-    .nav-cta { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); }
-
-    /* ===== Phone Mockup (CSS-only, flat design) ===== */
-    .phone {
-      position: relative; width: 100%; max-width: 270px; margin-inline: auto;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.1rem 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid var(--border);
     }
 
-    .phone-frame {
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo span { color: var(--teal-bright); }
+
+    .nav-cta {
+      font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
+      padding: 0.5rem 1.2rem; border-radius: 999px;
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover { color: var(--text); border-color: var(--border-hover); background: #111; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
       position: relative;
-      border-radius: 32px;
-      border: 4px solid var(--border);
-      background: var(--bg-offset);
-      aspect-ratio: 9 / 19.5;
+      padding-top: 5rem;
       overflow: hidden;
     }
 
-    .phone-frame::before {
-      content: ""; position: absolute; top: 0; left: 50%;
-      transform: translateX(-50%); width: 80px; height: 20px;
-      background: var(--border); border-radius: 0 0 16px 16px;
-      border-top: none;
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 0%, var(--teal-glow) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, var(--orange-glow) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 0.92;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title .line { display: block; }
+    .hero-title .teal { color: var(--teal-bright); }
+    .hero-title .orange { color: var(--orange); }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-dim);
+      margin-bottom: 2.5rem;
+      max-width: 30rem;
+      line-height: 1.75;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+
+    /* ===== PHONE MOCKUP ===== */
+    .phone-glow {
+      position: absolute;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 220px; height: 420px;
+      background: radial-gradient(ellipse, var(--teal-glow) 0%, transparent 70%);
+      filter: blur(50px);
+      z-index: 0;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    .phone-mockup {
+      position: relative;
+      width: 280px;
+      transform: perspective(1200px) rotateY(-12deg) rotateX(3deg);
+      transition: transform 0.6s ease;
+      z-index: 1;
+    }
+
+    .phone-mockup:hover {
+      transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    }
+
+    .phone-body {
+      background: linear-gradient(145deg, #151515, #0a0a0a);
+      border-radius: 38px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1.5px #252525,
+        0 0 0 3px #0a0a0a,
+        0 40px 100px rgba(0, 0, 0, 0.9),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      position: relative;
+    }
+
+    .phone-body::before {
+      content: "";
+      position: absolute;
+      top: 14px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 24px;
+      background: #080808;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
     }
 
     .phone-screen {
-      position: absolute; inset: 4px;
+      background: #010101;
       border-radius: 26px;
-      background: #050505; overflow: hidden;
+      overflow: hidden;
+      aspect-ratio: 9 / 19.5;
+      position: relative;
     }
 
-    /* ===== Feed Screen ===== */
-    .feed {
-      padding: 14px; height: 100%; overflow: hidden;
+    /* Feed */
+    .app-feed { padding: 24px 12px 0; height: 100%; position: relative; z-index: 1; }
+
+    .feed-card {
+      display: flex; gap: 10px; margin-bottom: 14px;
+      opacity: 0; transform: translateY(10px);
+      animation: cardIn 0.5s ease forwards;
     }
 
-    .feed-item {
-      display: flex; gap: 10px; margin-bottom: 12px;
+    .feed-card:nth-child(1) { animation-delay: 0.8s; }
+    .feed-card:nth-child(2) { animation-delay: 1.0s; }
+    .feed-card:nth-child(3) { animation-delay: 1.2s; }
+
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .feed-avatar {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--border); flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a, #252525);
+      flex-shrink: 0;
+      border: 1px solid #252525;
     }
 
-    .feed-line {
-      height: 3px; background: var(--border-strong);
-      border-radius: 2px; margin-bottom: 3px;
-    }
-    .feed-line-short { width: 50%; }
-    .feed-line-med { width: 70%; }
-    .feed-line-long { width: 100%; }
+    .feed-lines { flex: 1; }
+    .feed-line { height: 4px; background: linear-gradient(90deg, #1a1a1a, #222); border-radius: 2px; margin-bottom: 5px; }
+    .feed-line.w50 { width: 50%; }
+    .feed-line.w70 { width: 70%; }
+    .feed-line.w100 { width: 100%; }
+    .feed-img { width: 100%; height: 75px; background: linear-gradient(135deg, #111, #1a1a1a); border-radius: 10px; margin-top: 6px; border: 1px solid #1a1a1a; }
 
-    /* ===== Interrupt Overlay ===== */
-    .interrupt {
-      position: absolute; inset: 4px; border-radius: 26px;
-      background: var(--primary); display: flex;
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 1rem; padding: 1.5rem; text-align: center;
+    /* Interrupt */
+    .interrupt-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--teal) 0%, #0f766e 100%);
+      border-radius: 26px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 5;
+    }
+
+    .interrupt-overlay.visible { opacity: 1; pointer-events: auto; }
+
+    .interrupt-overlay h3 { font-size: 1.25rem; font-weight: 800; color: #000; letter-spacing: -0.02em; }
+    .interrupt-overlay p { font-size: 0.85rem; color: #000; opacity: 0.7; line-height: 1.5; }
+
+    .lock-btn {
+      background: #000; color: var(--teal-bright);
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: -0.01em;
+      transition: transform 0.2s ease;
+      margin-top: 0.4rem;
+    }
+
+    .lock-btn:hover { transform: scale(1.05); }
+
+    /* Lock-in */
+    .lockin-screen {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+      border-radius: 26px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.2rem;
       opacity: 0; pointer-events: none;
+      z-index: 6;
+      transition: opacity 0.5s ease;
     }
 
-    .interrupt.active {
-      opacity: 1;
-    }
+    .lockin-screen.visible { opacity: 1; pointer-events: auto; }
 
-    @media (prefers-reduced-motion: no-preference) {
-      .interrupt.active {
-        animation: popIn 0.3s ease-out forwards;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .interrupt.active { opacity: 1; animation: none; }
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .interrupt-title { font-size: 1.1rem; font-weight: 600; color: #000; margin: 0; }
-    .interrupt-text { font-size: 0.85rem; color: #000; opacity: 0.8; margin: 0; }
-
-    .lockin-btn {
-      background: #000; color: var(--primary);
-      border: none; border-radius: 12px;
-      padding: 0.625rem 1.25rem; font-weight: 600; font-size: 0.9rem;
-      cursor: pointer; transition: opacity 0.15s;
-    }
-    .lockin-btn:hover { opacity: 0.8; }
-
-    /* ===== Lock-in Screen ===== */
-    .lockin-display {
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 1.5rem; height: 100%; text-align: center;
-    }
     .lockin-timer {
-      font-size: 2.5rem; font-weight: 700;
-      font-variant-numeric: tabular-nums; color: var(--primary);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--teal-bright);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.03em;
     }
-    .lockin-task { font-size: 1.1rem; font-weight: 500; color: var(--text-secondary); }
-    .lockin-label { font-size: 0.8rem; color: var(--text-tertiary); }
 
-    /* ===== Steps ===== */
-    .steps {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem; margin-top: 3rem;
-    }
-    .step { text-align: center; }
-    .step-emoji {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px; border-radius: 12px;
-      background: rgba(13, 148, 136, 0.1); color: var(--primary);
-      margin-bottom: 0.75rem;
-    }
-    .step-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.375rem; }
-    .step-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; }
+    .lockin-task { font-size: 0.95rem; font-weight: 500; color: var(--text-dim); }
+    .lockin-label { font-size: 0.7rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
 
-    /* ===== Stats ===== */
-    .stats {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem; text-align: center;
-    }
-    .stat-value { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; color: var(--primary); }
-    .stat-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; }
+    /* ===== PROBLEM ===== */
+    .problem { background: var(--bg); position: relative; }
 
-    /* ===== Email Form ===== */
-    .email-form {
-      display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin-inline: auto;
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
     }
-    @media (min-width: 768px) { .email-form { flex-direction: row; } }
+
+    .problem-stat {
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      background: linear-gradient(135deg, var(--teal-bright) 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .problem-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .problem-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .data-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .data-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+    }
+
+    .data-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--teal-bright);
+      margin-bottom: 0.4rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .data-label { font-size: 0.8rem; color: var(--text-faint); line-height: 1.5; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ===== FEATURES ===== */
+    .features {
+      background: var(--bg-elev);
+      position: relative;
+    }
+
+    .features::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border-hover) 50%, transparent 100%);
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+
+    .feature-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 5rem;
+    }
+
+    .feature-block:last-child { margin-bottom: 0; }
+
+    .feature-block.reverse { direction: rtl; }
+    .feature-block.reverse > * { direction: ltr; }
+
+    .feature-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: var(--teal-glow);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .feature-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .feature-desc {
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      max-width: 26rem;
+    }
+
+    .feature-visual {
+      aspect-ratio: 16/10;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .feature-visual-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+
+    /* ===== STATS BAND ===== */
+    .stats-band {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--teal-bright);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, var(--orange-glow) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 30% 70%, var(--teal-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-inner { position: relative; max-width: 38rem; margin-inline: auto; }
+
+    .cta-title {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-desc {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 420px;
+      margin-inline: auto;
+    }
 
     .email-input {
-      flex: 1; padding: 0.875rem 1.25rem;
-      background: var(--bg-offset); color: var(--text);
-      font-size: 0.95rem; border: 1px solid var(--border);
-      border-radius: 10px; outline: none;
-      transition: border-color 0.15s ease;
-    }
-    .email-input:focus { border-color: var(--primary); }
-    .email-input::placeholder { color: var(--text-tertiary); }
-
-    .form-success {
-      display: none; text-align: center; padding: 1rem;
-      color: var(--primary); font-weight: 500;
+      flex: 1;
+      padding: 0.95rem 1.4rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
     }
 
-    /* ===== Footer ===== */
+    .email-input:focus { border-color: var(--teal-bright); }
+    .email-input::placeholder { color: var(--text-faint); }
+
+    .success-msg {
+      display: none;
+      padding: 1rem;
+      color: var(--teal-bright);
+      font-weight: 600;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    /* ===== FOOTER ===== */
     .footer {
       border-top: 1px solid var(--border);
-      padding: 2rem 0; text-align: center;
-      font-size: 0.8rem; color: var(--text-tertiary);
+      padding-block: 2.5rem;
+      text-align: center;
     }
 
-    /* ===== Responsive ===== */
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .fade-up.in-view { opacity: 1; transform: translateY(0); }
+
+    .fade-up:nth-child(2) { transition-delay: 0.08s; }
+    .fade-up:nth-child(3) { transition-delay: 0.16s; }
+    .fade-up:nth-child(4) { transition-delay: 0.24s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-visual { order: -1; }
+      .phone-mockup { transform: none; width: 240px; }
+      .phone-mockup:hover { transform: none; }
+      .hero-cta { justify-content: center; }
+      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .feature-block { grid-template-columns: 1fr; gap: 2rem; }
+      .feature-block.reverse { direction: ltr; }
+      .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cta-form { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      section { padding-block: 3.5rem; }
+    }
+
     @media (max-width: 480px) {
-      .hero-title { font-size: 2.5rem; }
-      section { padding-block: 3rem; }
+      .hero-title { font-size: 2.6rem; }
+      .phone-mockup { width: 220px; }
     }
   </style>
 </head>
@@ -270,84 +630,75 @@
 
   <!-- Navigation -->
   <nav class="nav">
-    <a href="#" class="nav-brand">UNMINDY</a>
-    <a href="#waitlist" class="nav-cta">Get early access</a>
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">UNMIN<span>DY</span></a>
+      <a href="#cta" class="nav-cta">Join waitlist</a>
+    </div>
   </nav>
 
   <!-- Hero -->
-  <section style="padding-top: 6rem; padding-bottom: 3rem;">
-    <div class="container">
-      <div class="center">
-        <h1 class="hero-title">Break the scroll.<br />Lock in the work.</h1>
-        <p class="subhead t-secondary" style="margin-top: 1.5rem; margin-bottom: 2rem;">
-          UNMINDY catches the autopilot scroll within 3 seconds, asks one honest question, and locks your phone into the task you've been avoiding.
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="fade-up">
+        <p class="label" style="margin-bottom: 1.5rem;">Now in private beta</p>
+        <h1 class="hero-title">
+          <span class="line">Break the</span>
+          <span class="line"><span class="teal">scroll.</span></span>
+          <span class="line"><span class="orange">Lock in.</span></span>
+        </h1>
+        <p class="hero-desc">
+          UNMINDY catches autopilot scrolling within 3 seconds, asks one honest question, and locks your phone into the work you've been avoiding.
         </p>
-        <a href="#waitlist" class="btn btn-primary">Get early access</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- The Problem -->
-  <section style="background: var(--bg-offset);">
-    <div class="container">
-      <div class="center">
-        <p class="small t-tertiary" style="margin-bottom: 0.5rem;">
-          The average person loses
-        </p>
-        <div class="stat-big t-primary">3h 47m</div>
-        <p class="small t-secondary" style="margin-top: 0.5rem;">
-          Daily to mindless scrolling
-        </p>
-        <p class="small t-tertiary" style="margin-top: 2rem;">
-          UNMINDY catches you in that moment, before it becomes hours.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- The Moment -->
-  <section>
-    <div class="container">
-      <div class="center" style="margin-bottom: 3rem;">
-        <h2 class="section-title">The moment it works</h2>
-        <p class="subhead t-secondary">
-          Your finger reaches for the scroll before your brain catches up. UNMINDY is already there.
-        </p>
+        <div class="hero-cta">
+          <a href="#cta" class="btn btn-primary">Get early access →</a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
       </div>
 
-      <div class="phone" id="moment-phone">
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <!-- Feed items -->
-            <div class="feed">
-              <div class="feed-item">
-                <div class="feed-avatar"></div>
-                <div class="feed-content">
-                  <div class="feed-line feed-line-long"></div>
-                  <div class="feed-line feed-line-med"></div>
-                  <div class="feed-line feed-line-short"></div>
+      <div class="hero-visual fade-up">
+        <div class="phone-glow"></div>
+        <div class="phone-mockup" id="heroPhone">
+          <div class="phone-body">
+            <div class="phone-screen">
+              <div class="app-feed" id="appFeed">
+                <div class="feed-card">
+                  <div class="feed-avatar"></div>
+                  <div class="feed-lines">
+                    <div class="feed-line w70"></div>
+                    <div class="feed-line w50"></div>
+                    <div class="feed-line w100"></div>
+                    <div class="feed-img"></div>
+                  </div>
+                </div>
+                <div class="feed-card">
+                  <div class="feed-avatar"></div>
+                  <div class="feed-lines">
+                    <div class="feed-line w100"></div>
+                    <div class="feed-line w70"></div>
+                    <div class="feed-line w50"></div>
+                    <div class="feed-img"></div>
+                  </div>
+                </div>
+                <div class="feed-card">
+                  <div class="feed-avatar"></div>
+                  <div class="feed-lines">
+                    <div class="feed-line w70"></div>
+                    <div class="feed-line w100"></div>
+                  </div>
                 </div>
               </div>
-              <div class="feed-item">
-                <div class="feed-avatar"></div>
-                <div class="feed-content">
-                  <div class="feed-line feed-line-long"></div>
-                  <div class="feed-line feed-line-med"></div>
-                </div>
+
+              <div class="interrupt-overlay" id="interruptOverlay">
+                <h3>Scrolling again?</h3>
+                <p>Lock in for 15 minutes. Get back to work.</p>
+                <button class="lock-btn" id="lockBtn">Lock me in</button>
               </div>
-              <div class="feed-item">
-                <div class="feed-avatar"></div>
-                <div class="feed-content">
-                  <div class="feed-line feed-line-med"></div>
-                  <div class="feed-line feed-line-long"></div>
-                </div>
+
+              <div class="lockin-screen" id="lockinScreen">
+                <div class="lockin-timer" id="timerDisplay">15:00</div>
+                <div class="lockin-task" id="timerTask">Reading: Chapter 3</div>
+                <div class="lockin-label">UNMINDY · Focus locked</div>
               </div>
-            </div>
-            <!-- Interrupt overlay (appears on scroll) -->
-            <div class="interrupt" id="interrupt-overlay">
-              <h3 class="interrupt-title">Scrolling again?</h3>
-              <p class="interrupt-text">Lock in for 15 minutes and get back to work.</p>
-              <button class="lockin-btn">Lock me in</button>
             </div>
           </div>
         </div>
@@ -355,26 +706,36 @@
     </div>
   </section>
 
-  <!-- The Lock-in -->
-  <section style="background: var(--bg-offset);">
+  <!-- Problem -->
+  <section class="problem">
     <div class="container">
-      <div class="center" style="margin-bottom: 3rem;">
-        <h2 class="section-title">The lock-in</h2>
-        <p class="subhead t-secondary">
-          Once committed, your phone stays focused until the timer expires.
-        </p>
-      </div>
+      <div class="problem-grid">
+        <div class="fade-up">
+          <p class="label" style="margin-bottom: 1rem;">The cost of autopilot</p>
+          <h2 class="problem-title">
+            The average person loses <span class="accent">3h 47m</span> every day to mindless scrolling.
+          </h2>
+          <p class="subhead">
+            By the time you notice, hours have disappeared. UNMINDY catches you in that exact moment — before it becomes hours.
+          </p>
+        </div>
 
-      <div class="phone">
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="lockin-display">
-              <div>
-                <div class="lockin-timer">14:42</div>
-                <div class="lockin-task">Reading: Chapter 3</div>
-              </div>
-              <div class="lockin-label">UNMINDY · Focus locked</div>
-            </div>
+        <div class="problem-cards">
+          <div class="data-card fade-up">
+            <div class="data-value">3.2s</div>
+            <div class="data-label">Before autopilot kicks in</div>
+          </div>
+          <div class="data-card fade-up">
+            <div class="data-value">147×</div>
+            <div class="data-label">Average daily phone unlocks</div>
+          </div>
+          <div class="data-card fade-up">
+            <div class="data-value">2.5h</div>
+            <div class="data-label">Time lost to social daily</div>
+          </div>
+          <div class="data-card fade-up">
+            <div class="data-value">73%</div>
+            <div class="data-label">Regret their scrolling</div>
           </div>
         </div>
       </div>
@@ -382,159 +743,272 @@
   </section>
 
   <!-- How It Works -->
-  <section>
+  <section class="features" id="how">
     <div class="container">
-      <div class="center" style="margin-bottom: 3rem;">
-        <h2 class="section-title">Three steps from scroll to start</h2>
-        <p class="subhead t-secondary">
+      <div class="features-header fade-up">
+        <p class="label" style="margin-bottom: 1rem;">How it works</p>
+        <h2 class="display-lg">Three steps from<br />scroll to <span class="teal-text">start</span>.</h2>
+        <p class="subhead" style="margin: 1.5rem auto 0;">
           No login. No to-do list. No guilt. Just a circuit-breaker between you and the scroll.
         </p>
       </div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-emoji">
-            <!-- Radar icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Catch -->
+      <div class="feature-block fade-up">
+        <div>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="8"/>
               <line x1="12" y1="12" x2="20" y2="12"/>
               <path d="M12 12a5 5 0 1 0 0-10"/>
             </svg>
           </div>
-          <h3 class="step-title">Catch</h3>
-          <p class="step-desc">Detects autopilot scrolling within 3 seconds.</p>
+          <h3 class="feature-title">Catch</h3>
+          <p class="feature-desc">Detects autopilot scrolling within 3 seconds — before your brain catches up. It doesn't wait for you to notice.</p>
         </div>
-        <div class="step">
-          <div class="step-emoji">
-            <!-- Question icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
+          <div class="feature-visual-inner">
+            <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="32" stroke="var(--teal)" stroke-width="1" opacity="0.2"/>
+              <circle cx="50" cy="50" r="22" stroke="var(--teal)" stroke-width="1" opacity="0.4"/>
+              <circle cx="50" cy="50" r="10" fill="var(--teal)"/>
+              <line x1="50" y1="18" x2="50" y2="40" stroke="var(--teal)" stroke-width="2"/>
+              <circle cx="50" cy="15" r="4" fill="var(--orange)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ask -->
+      <div class="feature-block reverse fade-up">
+        <div>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <path d="M9 9a3 3 0 1 1 5.53.72"/>
               <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
           </div>
-          <h3 class="step-title">Ask</h3>
-          <p class="step-desc">One question: Lock in for 15 minutes?</p>
+          <h3 class="feature-title">Ask</h3>
+          <p class="feature-desc">One question. No guilt, no complex prompts — just "Lock in for 15 minutes?" You either commit or keep scrolling.</p>
         </div>
-        <div class="step">
-          <div class="step-emoji">
-            <!-- Lock icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
+          <div class="feature-visual-inner">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 2.2rem; text-align: center;">
+              <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.2rem; font-weight: 500;">Lock in for 15 minutes?</p>
+              <div style="display: flex; gap: 0.6rem; justify-content: center;">
+                <div style="background: var(--teal); color: #000; padding: 0.5rem 1.3rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700;">Yes</div>
+                <div style="border: 1px solid var(--border); padding: 0.5rem 1.3rem; border-radius: 999px; font-size: 0.8rem; color: var(--text-dim);">No</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lock -->
+      <div class="feature-block fade-up">
+        <div>
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="11" width="18" height="10" rx="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
           </div>
-          <h3 class="step-title">Lock</h3>
-          <p class="step-desc">Phone locks to your task. No escape.</p>
+          <h3 class="feature-title">Lock</h3>
+          <p class="feature-desc">Your phone locks to the task. No shortcuts, no escape. When the timer expires, you're free — but you might want to keep going.</p>
+        </div>
+        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
+          <div class="feature-visual-inner">
+            <div style="text-align: center;">
+              <div style="font-size: 4rem; font-weight: 900; color: var(--teal-bright); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;">14:42</div>
+              <div style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem; font-weight: 500;">Reading: Chapter 3</div>
+              <div style="font-size: 0.65rem; color: var(--text-faint); margin-top: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;">UNMINDY · Focus locked</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- By the Numbers -->
-  <section style="background: var(--bg-offset);">
+  <!-- Stats -->
+  <section class="stats-band">
     <div class="container">
-      <div class="center" style="margin-bottom: 3rem;">
-        <h2 class="section-title">By the numbers</h2>
-        <p class="subhead t-secondary">
-          Built by a solo developer. Used by early adopters who refuse to waste another day to scrolling.
-        </p>
-      </div>
-
-      <div class="stats">
-        <div>
-          <div class="stat-value">1,247</div>
+      <div class="stats-grid">
+        <div class="fade-up">
+          <div class="stat-num" data-target="1247" data-suffix="">0</div>
           <div class="stat-label">Early adopters</div>
         </div>
-        <div>
-          <div class="stat-value">4.2h</div>
+        <div class="fade-up">
+          <div class="stat-num" data-target="4.2" data-suffix="h" data-decimal="1">0h</div>
           <div class="stat-label">Focus saved weekly</div>
         </div>
-        <div>
-          <div class="stat-value">89%</div>
+        <div class="fade-up">
+          <div class="stat-num" data-target="89" data-suffix="%">0%</div>
           <div class="stat-label">Completion rate</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Waitlist -->
-  <section id="waitlist">
-    <div class="container">
-      <div class="center">
-        <h2 class="section-title">Stop saying later.</h2>
-        <p class="subhead t-secondary" style="margin-bottom: 2rem;">
-          Leave your email. We'll reach out when it's ready — no spam, no noise.
-        </p>
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="container cta-inner">
+      <div class="fade-up">
+        <p class="label" style="margin-bottom: 1rem;">Join the waitlist</p>
+        <h2 class="cta-title">Stop saying <span class="accent">later.</span></h2>
+        <p class="cta-desc">Leave your email. We'll reach out when it's ready — no spam, no noise, just the work.</p>
 
-        <form id="waitlist-form">
-          <label for="email" class="visually-hidden">Email address</label>
+        <form id="waitlistForm" class="cta-form">
+          <label for="email" class="sr-only">Email address</label>
           <input
-            type="email" id="email" name="email"
-            placeholder="you@example.com" autocomplete="email"
-            class="email-input" required
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            class="email-input"
+            required
           />
-          <button type="submit" class="btn btn-primary">Join the waitlist</button>
+          <button type="submit" class="btn btn-primary">Join →</button>
         </form>
 
-        <p class="small t-tertiary" style="margin-top: 1rem;" id="fine-print">
-          No spam. One email when we launch.
-        </p>
-
-        <p class="form-success" id="form-success">
-          Added to the waitlist. Check your email for confirmation.
-        </p>
+        <p class="success-msg" id="formSuccess">You're on the list. We'll be in touch.</p>
+        <p style="font-size: 0.75rem; color: var(--text-faint); margin-top: 1rem; letter-spacing: 0.04em;">No spam. One email when we launch.</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 UNMINDY. Built in public.</p>
+    <p class="footer-text">© 2025 UNMINDY. Built in public.</p>
   </footer>
 
   <script>
     (function() {
       'use strict';
 
-      // Single Orchestrated Animation:
-      // The interrupt overlay appears once when the phone mockup scrolls into view
-      var interruptOverlay = document.getElementById('interrupt-overlay');
-      var phoneMockup = document.getElementById('moment-phone');
+      // ===== Scroll Animations =====
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
 
-      if ('IntersectionObserver' in window && interruptOverlay && phoneMockup) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              // Small delay for visual timing
-              setTimeout(function() {
-                interruptOverlay.classList.add('active');
-              }, 300);
-              observer.unobserve(phoneMockup);
-            }
-          });
-        }, { threshold: 0.5 });
+            // Trigger counter animations
+            entry.target.querySelectorAll('[data-target]').forEach(function(el) {
+              animateCounter(el);
+            });
 
-        observer.observe(phoneMockup);
-      } else if (interruptOverlay) {
-        // Fallback
-        setTimeout(function() {
-          interruptOverlay.classList.add('active');
-        }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.fade-up').forEach(function(el) {
+        observer.observe(el);
+      });
+
+      // ===== Counter Animation =====
+      function animateCounter(el) {
+        if (el.dataset.animated) return;
+        el.dataset.animated = 'true';
+
+        var target = parseFloat(el.getAttribute('data-target'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var decimal = parseInt(el.getAttribute('data-decimal') || '0', 10);
+        var duration = 1500;
+        var start = performance.now();
+
+        function step(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 4);
+          var current = target * eased;
+
+          el.textContent = current.toFixed(decimal) + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toFixed(decimal) + suffix;
+          }
+        }
+
+        requestAnimationFrame(step);
       }
 
-      // Form Validation
-      var form = document.getElementById('waitlist-form');
-      var successMsg = document.getElementById('form-success');
+      // ===== Phone Animation Sequence =====
+      var interruptOverlay = document.getElementById('interruptOverlay');
+      var lockinScreen = document.getElementById('lockinScreen');
+      var lockBtn = document.getElementById('lockBtn');
+      var state = 'idle';
+
+      function showInterrupt() {
+        if (state !== 'idle') return;
+        state = 'interrupt';
+        interruptOverlay.classList.add('visible');
+      }
+
+      function showLockin() {
+        if (state !== 'interrupt') return;
+        state = 'lockin';
+        interruptOverlay.classList.remove('visible');
+        lockinScreen.classList.add('visible');
+        startTimer();
+      }
+
+      function resetAnimation() {
+        lockinScreen.classList.remove('visible');
+        state = 'idle';
+        clearInterval(timerInterval);
+        timerRunning = false;
+        setTimeout(showInterrupt, 400);
+      }
+
+      setTimeout(function() {
+        showInterrupt();
+        setTimeout(showLockin, 2500);
+      }, 1000);
+
+      if (lockBtn) lockBtn.addEventListener('click', showLockin);
+      if (lockinScreen) lockinScreen.addEventListener('click', resetAnimation);
+
+      // ===== Timer =====
+      var timerRunning = false;
+      var timerInterval = null;
+      var minutes = 15, seconds = 0;
+
+      function startTimer() {
+        if (timerRunning) return;
+        timerRunning = true;
+        minutes = 14; seconds = 59;
+        updateTimer();
+        timerInterval = setInterval(function() {
+          if (seconds === 0) {
+            if (minutes === 0) { clearInterval(timerInterval); timerRunning = false; return; }
+            minutes--; seconds = 59;
+          } else { seconds--; }
+          updateTimer();
+        }, 1000);
+      }
+
+      function updateTimer() {
+        var el = document.getElementById('timerDisplay');
+        if (el) el.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+      }
+
+      // ===== Form (instant success) =====
+      var form = document.getElementById('waitlistForm');
+      var successEl = document.getElementById('formSuccess');
 
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          var email = document.getElementById('email').value.trim();
+          var emailInput = document.getElementById('email');
+          var email = emailInput.value.trim();
 
           if (email && email.includes('@')) {
             form.style.display = 'none';
-            if (successMsg) successMsg.style.display = 'block';
+            if (successEl) successEl.style.display = 'block';
 
             fetch('https://formspree.io/f/abc123', {
               method: 'POST',
@@ -544,6 +1018,17 @@
           }
         });
       }
+
+      // ===== Smooth scroll =====
+      document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+
     })();
   </script>
 </body>
