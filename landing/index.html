@@ -17,17 +17,12 @@
     :root {
       --bg: #000000;
       --bg-elev: #030303;
-      --bg-card: #080808;
       --border: #1a1a1a;
-      --border-hover: #2a2a2a;
       --text: #f5f5f5;
-      --text-dim: #7a7a7a;
-      --text-faint: #4a4a4a;
+      --text-dim: #555;
+      --text-faint: #333;
       --teal: #0d9488;
-      --teal-bright: #14b8a6;
-      --teal-glow: rgba(13, 148, 136, 0.18);
-      --orange: #ea580c;
-      --orange-glow: rgba(234, 88, 12, 0.15);
+      --teal-glow: rgba(13, 148, 136, 0.2);
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -45,7 +40,6 @@
 
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    img { max-width: 100%; display: block; }
 
     .sr-only {
       position: absolute; width: 1px; height: 1px; overflow: hidden;
@@ -53,86 +47,79 @@
     }
 
     .container { width: min(92%, 1200px); margin-inline: auto; }
-    section { padding-block: clamp(5rem, 10vw, 9rem); }
 
     /* ===== TYPOGRAPHY ===== */
     .display-xl {
-      font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+      font-size: clamp(3.5rem, 9vw, 8rem);
       font-weight: 900;
-      letter-spacing: -0.035em;
-      line-height: 0.95;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
     }
 
     .display-lg {
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.05;
     }
 
-    .headline {
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.25;
+    .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
     }
 
     .subhead {
-      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
       font-weight: 400;
       color: var(--text-dim);
       line-height: 1.75;
-      max-width: 38rem;
+      max-width: 34rem;
     }
 
-    .label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--teal-bright);
-    }
-
-    .accent { color: var(--orange); }
-    .teal-text { color: var(--teal-bright); }
+    .teal { color: var(--teal); }
 
     /* ===== BUTTONS ===== */
     .btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 1rem 2.2rem;
+      padding: 0.9rem 2rem;
       border-radius: 999px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
     .btn-primary {
-      background: var(--orange);
-      color: #fff;
-      box-shadow: 0 0 50px var(--orange-glow), 0 0 0 1px rgba(234, 88, 12, 0.3);
+      background: var(--text);
+      color: var(--bg);
+      box-shadow: 0 0 30px var(--teal-glow);
     }
+
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 70px rgba(234, 88, 12, 0.25), 0 0 0 1px rgba(234, 88, 12, 0.5);
+      box-shadow: 0 0 50px var(--teal-glow);
     }
+
     .btn-primary:active { transform: scale(0.97); }
 
     .btn-ghost {
-      color: var(--text);
-      border: 1px solid var(--border-hover);
-      backdrop-filter: blur(10px);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
     }
-    .btn-ghost:hover { background: #f5f5f5; color: #000; border-color: #f5f5f5; }
+
+    .btn-ghost:hover { color: var(--text); border-color: #333; }
 
     /* ===== NAV ===== */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 1.1rem 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(24px) saturate(180%);
+      padding: 1.2rem 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -141,11 +128,11 @@
     }
 
     .nav-logo {
-      font-size: 1.1rem; font-weight: 800;
-      letter-spacing: 0.05em;
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: 0.08em;
     }
 
-    .nav-logo span { color: var(--teal-bright); }
+    .nav-logo span { color: var(--teal); }
 
     .nav-cta {
       font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
@@ -154,152 +141,148 @@
       transition: all 0.2s ease;
     }
 
-    .nav-cta:hover { color: var(--text); border-color: var(--border-hover); background: #111; }
+    .nav-cta:hover { color: var(--text); border-color: #333; }
 
     /* ===== HERO ===== */
     .hero {
       min-height: 100vh;
-      display: flex; align-items: center;
-      position: relative;
+      display: flex; align-items: flex-end;
       padding-top: 5rem;
-      overflow: hidden;
+      padding-bottom: 6rem;
+      position: relative;
     }
 
     .hero::before {
       content: "";
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 20% 0%, var(--teal-glow) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, var(--orange-glow) 0%, transparent 50%);
+      background: radial-gradient(ellipse 50% 40% at 85% 15%, var(--teal-glow) 0%, transparent 60%);
       pointer-events: none;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3rem;
-      align-items: center;
-      position: relative;
-    }
+    .hero-inner { position: relative; width: 100%; }
 
     .hero-title {
-      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-size: clamp(3.5rem, 9vw, 8rem);
       font-weight: 900;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.04em;
       line-height: 0.92;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
     }
 
     .hero-title .line { display: block; }
-    .hero-title .teal { color: var(--teal-bright); }
-    .hero-title .orange { color: var(--orange); }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
     .hero-desc {
-      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
       color: var(--text-dim);
-      margin-bottom: 2.5rem;
-      max-width: 30rem;
+      max-width: 28rem;
       line-height: 1.75;
     }
 
-    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-cta { display: flex; gap: 1rem; flex-shrink: 0; }
 
     /* ===== PHONE MOCKUP ===== */
-    .phone-glow {
+    .phone-wrapper {
       position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 220px; height: 420px;
-      background: radial-gradient(ellipse, var(--teal-glow) 0%, transparent 70%);
-      filter: blur(50px);
-      z-index: 0;
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
-    }
-
-    .phone-mockup {
-      position: relative;
-      width: 280px;
-      transform: perspective(1200px) rotateY(-12deg) rotateX(3deg);
-      transition: transform 0.6s ease;
+      top: 10%;
+      right: 3%;
+      width: 300px;
       z-index: 1;
     }
 
-    .phone-mockup:hover {
-      transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    .phone-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px; height: 480px;
+      background: radial-gradient(ellipse, var(--teal-glow) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: phonePulse 4s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes phonePulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
     }
 
     .phone-body {
-      background: linear-gradient(145deg, #151515, #0a0a0a);
-      border-radius: 38px;
-      padding: 12px;
+      background: linear-gradient(160deg, #111, #080808);
+      border-radius: 40px;
+      padding: 10px;
       box-shadow:
-        0 0 0 1.5px #252525,
-        0 0 0 3px #0a0a0a,
-        0 40px 100px rgba(0, 0, 0, 0.9),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      position: relative;
+        0 0 0 1.5px #222,
+        0 0 0 4px #050505,
+        0 50px 120px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transform: perspective(1200px) rotateY(-15deg) rotateX(4deg);
+      transition: transform 0.6s ease;
+    }
+
+    .phone-body:hover {
+      transform: perspective(1200px) rotateY(-5deg) rotateX(1deg);
     }
 
     .phone-body::before {
       content: "";
       position: absolute;
-      top: 14px; left: 50%; transform: translateX(-50%);
-      width: 100px; height: 24px;
-      background: #080808;
-      border-radius: 0 0 18px 18px;
+      top: 10px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 26px;
+      background: #060606;
+      border-radius: 0 0 20px 20px;
       z-index: 10;
     }
 
     .phone-screen {
-      background: #010101;
-      border-radius: 26px;
+      background: #000;
+      border-radius: 30px;
       overflow: hidden;
       aspect-ratio: 9 / 19.5;
       position: relative;
     }
 
     /* Feed */
-    .app-feed { padding: 24px 12px 0; height: 100%; position: relative; z-index: 1; }
+    .app-feed { padding: 28px 12px 0; height: 100%; position: relative; z-index: 1; }
 
     .feed-card {
       display: flex; gap: 10px; margin-bottom: 14px;
-      opacity: 0; transform: translateY(10px);
-      animation: cardIn 0.5s ease forwards;
+      opacity: 0; transform: translateY(8px);
+      animation: cardIn 0.6s ease forwards;
     }
 
-    .feed-card:nth-child(1) { animation-delay: 0.8s; }
-    .feed-card:nth-child(2) { animation-delay: 1.0s; }
-    .feed-card:nth-child(3) { animation-delay: 1.2s; }
+    .feed-card:nth-child(1) { animation-delay: 0.6s; }
+    .feed-card:nth-child(2) { animation-delay: 0.8s; }
+    .feed-card:nth-child(3) { animation-delay: 1.0s; }
 
     @keyframes cardIn {
       to { opacity: 1; transform: translateY(0); }
     }
 
     .feed-avatar {
-      width: 26px; height: 26px; border-radius: 50%;
-      background: linear-gradient(135deg, #1a1a1a, #252525);
-      flex-shrink: 0;
-      border: 1px solid #252525;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #111; flex-shrink: 0;
+      border: 1px solid #222;
     }
 
     .feed-lines { flex: 1; }
-    .feed-line { height: 4px; background: linear-gradient(90deg, #1a1a1a, #222); border-radius: 2px; margin-bottom: 5px; }
-    .feed-line.w50 { width: 50%; }
-    .feed-line.w70 { width: 70%; }
+    .feed-line { height: 3px; background: #151515; border-radius: 2px; margin-bottom: 4px; }
+    .feed-line.w60 { width: 60%; }
+    .feed-line.w80 { width: 80%; }
     .feed-line.w100 { width: 100%; }
-    .feed-img { width: 100%; height: 75px; background: linear-gradient(135deg, #111, #1a1a1a); border-radius: 10px; margin-top: 6px; border: 1px solid #1a1a1a; }
+    .feed-img { width: 100%; height: 65px; background: #0a0a0a; border-radius: 8px; margin-top: 5px; border: 1px solid #151515; }
 
     /* Interrupt */
     .interrupt-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(160deg, var(--teal) 0%, #0f766e 100%);
-      border-radius: 26px;
+      background: var(--teal);
+      border-radius: 30px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 1rem;
@@ -307,23 +290,23 @@
       text-align: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition: opacity 0.4s ease;
       z-index: 5;
     }
 
     .interrupt-overlay.visible { opacity: 1; pointer-events: auto; }
 
-    .interrupt-overlay h3 { font-size: 1.25rem; font-weight: 800; color: #000; letter-spacing: -0.02em; }
-    .interrupt-overlay p { font-size: 0.85rem; color: #000; opacity: 0.7; line-height: 1.5; }
+    .interrupt-overlay h3 { font-size: 1.3rem; font-weight: 800; color: #000; letter-spacing: -0.02em; }
+    .interrupt-overlay p { font-size: 0.85rem; color: #000; opacity: 0.65; line-height: 1.5; }
 
     .lock-btn {
-      background: #000; color: var(--teal-bright);
-      padding: 0.75rem 1.8rem;
+      background: #000; color: var(--teal);
+      padding: 0.7rem 1.6rem;
       border-radius: 999px;
       font-weight: 700; font-size: 0.85rem;
       letter-spacing: -0.01em;
       transition: transform 0.2s ease;
-      margin-top: 0.4rem;
+      margin-top: 0.3rem;
     }
 
     .lock-btn:hover { transform: scale(1.05); }
@@ -331,11 +314,11 @@
     /* Lock-in */
     .lockin-screen {
       position: absolute; inset: 0;
-      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
-      border-radius: 26px;
+      background: radial-gradient(circle at center, #080808 0%, #000 100%);
+      border-radius: 30px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 1.2rem;
+      gap: 1rem;
       opacity: 0; pointer-events: none;
       z-index: 6;
       transition: opacity 0.5s ease;
@@ -344,153 +327,152 @@
     .lockin-screen.visible { opacity: 1; pointer-events: auto; }
 
     .lockin-timer {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 900;
-      color: var(--teal-bright);
+      color: var(--teal);
       font-variant-numeric: tabular-nums;
       letter-spacing: -0.03em;
     }
 
-    .lockin-task { font-size: 0.95rem; font-weight: 500; color: var(--text-dim); }
-    .lockin-label { font-size: 0.7rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
+    .lockin-task { font-size: 0.9rem; font-weight: 500; color: var(--text-dim); }
+    .lockin-label { font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
+
+    /* ===== SECTION DIVIDER ===== */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
     /* ===== PROBLEM ===== */
-    .problem { background: var(--bg); position: relative; }
+    .problem { padding-block: 7rem; }
 
     .problem-grid {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 5rem;
-      align-items: center;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+      align-items: start;
     }
 
     .problem-stat {
-      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-size: clamp(4rem, 8vw, 7rem);
       font-weight: 900;
       letter-spacing: -0.04em;
-      line-height: 0.85;
-      background: linear-gradient(135deg, var(--teal-bright) 0%, var(--orange) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
     }
 
     .problem-title {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-cell {
+      background: var(--bg);
+      padding: 2rem 1.5rem;
+    }
+
+    .data-value {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .data-label {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how { padding-block: 7rem; }
+
+    .how-header { margin-bottom: 5rem; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+
+    .step-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ===== MOMENT ===== */
+    .moment { padding-block: 7rem; }
+
+    .moment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .moment-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.1;
       margin-bottom: 1.5rem;
     }
 
-    .problem-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .data-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2rem 1.5rem;
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .data-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-6px);
-    }
-
-    .data-value {
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--teal-bright);
-      margin-bottom: 0.4rem;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .data-label { font-size: 0.8rem; color: var(--text-faint); line-height: 1.5; text-transform: uppercase; letter-spacing: 0.06em; }
-
-    /* ===== FEATURES ===== */
-    .features {
-      background: var(--bg-elev);
-      position: relative;
-    }
-
-    .features::before {
-      content: "";
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--border-hover) 50%, transparent 100%);
-    }
-
-    .features-header {
-      text-align: center;
-      margin-bottom: 4.5rem;
-    }
-
-    .feature-block {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+    .moment-visual {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 5rem;
-    }
-
-    .feature-block:last-child { margin-bottom: 0; }
-
-    .feature-block.reverse { direction: rtl; }
-    .feature-block.reverse > * { direction: ltr; }
-
-    .feature-icon {
-      width: 56px; height: 56px;
-      border-radius: 16px;
-      background: var(--teal-glow);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.8rem;
-    }
-
-    .feature-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      line-height: 1.15;
-    }
-
-    .feature-desc {
-      color: var(--text-dim);
-      line-height: 1.8;
-      font-size: 0.95rem;
-      max-width: 26rem;
-    }
-
-    .feature-visual {
-      aspect-ratio: 16/10;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .feature-visual-inner {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      padding: 2rem;
     }
 
     /* ===== STATS BAND ===== */
     .stats-band {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      padding-block: 4rem;
     }
 
-    .stats-grid {
+    .stats-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
@@ -501,39 +483,37 @@
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 900;
       letter-spacing: -0.03em;
-      color: var(--teal-bright);
+      color: var(--text);
       font-variant-numeric: tabular-nums;
     }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-faint);
-      margin-top: 0.4rem;
+      margin-top: 0.5rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-weight: 500;
     }
 
     /* ===== CTA ===== */
-    .cta-section {
-      position: relative;
+    .cta {
+      padding-block: 8rem;
       text-align: center;
-      overflow: hidden;
+      position: relative;
     }
 
-    .cta-section::before {
+    .cta::before {
       content: "";
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 60% at 50% 50%, var(--orange-glow) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 30% 70%, var(--teal-glow) 0%, transparent 60%);
+      background: radial-gradient(ellipse 50% 50% at 50% 50%, var(--teal-glow) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .cta-inner { position: relative; max-width: 38rem; margin-inline: auto; }
+    .cta-inner { position: relative; max-width: 32rem; margin-inline: auto; }
 
     .cta-title {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 900;
       letter-spacing: -0.035em;
       line-height: 0.95;
@@ -542,50 +522,50 @@
 
     .cta-desc {
       color: var(--text-dim);
-      font-size: 1.05rem;
+      font-size: 1rem;
       margin-bottom: 2.5rem;
     }
 
     .cta-form {
       display: flex;
       gap: 0.75rem;
-      max-width: 420px;
+      max-width: 400px;
       margin-inline: auto;
     }
 
     .email-input {
       flex: 1;
-      padding: 0.95rem 1.4rem;
-      background: var(--bg-card);
+      padding: 0.9rem 1.3rem;
+      background: transparent;
       border: 1px solid var(--border);
       border-radius: 999px;
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       outline: none;
       transition: border-color 0.2s ease;
     }
 
-    .email-input:focus { border-color: var(--teal-bright); }
+    .email-input:focus { border-color: #333; }
     .email-input::placeholder { color: var(--text-faint); }
 
     .success-msg {
       display: none;
       padding: 1rem;
-      color: var(--teal-bright);
+      color: var(--teal);
       font-weight: 600;
       margin-top: 1rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     /* ===== FOOTER ===== */
     .footer {
       border-top: 1px solid var(--border);
-      padding-block: 2.5rem;
+      padding-block: 2rem;
       text-align: center;
     }
 
     .footer-text {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-faint);
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -594,35 +574,29 @@
     /* ===== ANIMATIONS ===== */
     .fade-up {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .fade-up.in-view { opacity: 1; transform: translateY(0); }
 
-    .fade-up:nth-child(2) { transition-delay: 0.08s; }
-    .fade-up:nth-child(3) { transition-delay: 0.16s; }
-    .fade-up:nth-child(4) { transition-delay: 0.24s; }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-visual { order: -1; }
-      .phone-mockup { transform: none; width: 240px; }
-      .phone-mockup:hover { transform: none; }
-      .hero-cta { justify-content: center; }
-      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .feature-block { grid-template-columns: 1fr; gap: 2rem; }
-      .feature-block.reverse { direction: ltr; }
-      .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .phone-wrapper { display: none; }
+      .hero-meta { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .hero-cta { width: 100%; }
+      .btn-primary, .btn-ghost { flex: 1; justify-content: center; }
+      .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .moment-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .steps { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; gap: 2rem; }
       .cta-form { flex-direction: column; }
-      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
-      section { padding-block: 3.5rem; }
+      section { padding-block: 4rem; }
+      .how, .moment, .problem, .cta { padding-block: 5rem; }
     }
 
-    @media (max-width: 480px) {
-      .hero-title { font-size: 2.6rem; }
-      .phone-mockup { width: 220px; }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .phone-wrapper { width: 240px; right: 2%; }
     }
   </style>
 </head>
@@ -638,102 +612,101 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="fade-up">
-        <p class="label" style="margin-bottom: 1.5rem;">Now in private beta</p>
-        <h1 class="hero-title">
-          <span class="line">Break the</span>
-          <span class="line"><span class="teal">scroll.</span></span>
-          <span class="line"><span class="orange">Lock in.</span></span>
-        </h1>
-        <p class="hero-desc">
-          UNMINDY catches autopilot scrolling within 3 seconds, asks one honest question, and locks your phone into the work you've been avoiding.
-        </p>
-        <div class="hero-cta">
-          <a href="#cta" class="btn btn-primary">Get early access →</a>
-          <a href="#how" class="btn btn-ghost">See how it works</a>
-        </div>
-      </div>
-
-      <div class="hero-visual fade-up">
-        <div class="phone-glow"></div>
-        <div class="phone-mockup" id="heroPhone">
-          <div class="phone-body">
-            <div class="phone-screen">
-              <div class="app-feed" id="appFeed">
-                <div class="feed-card">
-                  <div class="feed-avatar"></div>
-                  <div class="feed-lines">
-                    <div class="feed-line w70"></div>
-                    <div class="feed-line w50"></div>
-                    <div class="feed-line w100"></div>
-                    <div class="feed-img"></div>
-                  </div>
-                </div>
-                <div class="feed-card">
-                  <div class="feed-avatar"></div>
-                  <div class="feed-lines">
-                    <div class="feed-line w100"></div>
-                    <div class="feed-line w70"></div>
-                    <div class="feed-line w50"></div>
-                    <div class="feed-img"></div>
-                  </div>
-                </div>
-                <div class="feed-card">
-                  <div class="feed-avatar"></div>
-                  <div class="feed-lines">
-                    <div class="feed-line w70"></div>
-                    <div class="feed-line w100"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="interrupt-overlay" id="interruptOverlay">
-                <h3>Scrolling again?</h3>
-                <p>Lock in for 15 minutes. Get back to work.</p>
-                <button class="lock-btn" id="lockBtn">Lock me in</button>
-              </div>
-
-              <div class="lockin-screen" id="lockinScreen">
-                <div class="lockin-timer" id="timerDisplay">15:00</div>
-                <div class="lockin-task" id="timerTask">Reading: Chapter 3</div>
-                <div class="lockin-label">UNMINDY · Focus locked</div>
+    <div class="phone-wrapper">
+      <div class="phone-glow"></div>
+      <div class="phone-body">
+        <div class="phone-screen">
+          <div class="app-feed">
+            <div class="feed-card">
+              <div class="feed-avatar"></div>
+              <div class="feed-lines">
+                <div class="feed-line w80"></div>
+                <div class="feed-line w60"></div>
+                <div class="feed-line w100"></div>
+                <div class="feed-img"></div>
               </div>
             </div>
+            <div class="feed-card">
+              <div class="feed-avatar"></div>
+              <div class="feed-lines">
+                <div class="feed-line w100"></div>
+                <div class="feed-line w80"></div>
+                <div class="feed-line w60"></div>
+                <div class="feed-img"></div>
+              </div>
+            </div>
+            <div class="feed-card">
+              <div class="feed-avatar"></div>
+              <div class="feed-lines">
+                <div class="feed-line w80"></div>
+                <div class="feed-line w100"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="interrupt-overlay" id="interruptOverlay">
+            <h3>Scrolling again?</h3>
+            <p>Lock in for 15 minutes.<br />Get back to work.</p>
+            <button class="lock-btn" id="lockBtn">Lock me in</button>
+          </div>
+
+          <div class="lockin-screen" id="lockinScreen">
+            <div class="lockin-timer" id="timerDisplay">15:00</div>
+            <div class="lockin-task">Reading: Chapter 3</div>
+            <div class="lockin-label">UNMINDY · Focus locked</div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="container hero-inner">
+      <h1 class="hero-title fade-up">
+        <span class="line">Break the</span>
+        <span class="line"><span class="teal">scroll.</span></span>
+        <span class="line">Lock in.</span>
+      </h1>
+
+      <div class="hero-meta">
+        <p class="hero-desc fade-up">
+          UNMINDY catches autopilot scrolling within 3 seconds, asks one honest question, and locks your phone into the work you've been avoiding.
+        </p>
+        <div class="hero-cta fade-up">
+          <a href="#cta" class="btn btn-primary">Get early access →</a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <hr class="divider" />
 
   <!-- Problem -->
   <section class="problem">
     <div class="container">
       <div class="problem-grid">
         <div class="fade-up">
-          <p class="label" style="margin-bottom: 1rem;">The cost of autopilot</p>
-          <h2 class="problem-title">
-            The average person loses <span class="accent">3h 47m</span> every day to mindless scrolling.
-          </h2>
+          <p class="label" style="margin-bottom: 1.5rem;">The cost of autopilot</p>
+          <div class="problem-stat">3h 47m</div>
+          <h2 class="problem-title">lost to mindless scrolling every single day.</h2>
           <p class="subhead">
             By the time you notice, hours have disappeared. UNMINDY catches you in that exact moment — before it becomes hours.
           </p>
         </div>
 
-        <div class="problem-cards">
-          <div class="data-card fade-up">
+        <div class="data-grid fade-up">
+          <div class="data-cell">
             <div class="data-value">3.2s</div>
             <div class="data-label">Before autopilot kicks in</div>
           </div>
-          <div class="data-card fade-up">
+          <div class="data-cell">
             <div class="data-value">147×</div>
-            <div class="data-label">Average daily phone unlocks</div>
+            <div class="data-label">Average daily unlocks</div>
           </div>
-          <div class="data-card fade-up">
+          <div class="data-cell">
             <div class="data-value">2.5h</div>
-            <div class="data-label">Time lost to social daily</div>
+            <div class="data-label">Lost to social daily</div>
           </div>
-          <div class="data-card fade-up">
+          <div class="data-cell">
             <div class="data-value">73%</div>
             <div class="data-label">Regret their scrolling</div>
           </div>
@@ -742,87 +715,66 @@
     </div>
   </section>
 
+  <hr class="divider" />
+
   <!-- How It Works -->
-  <section class="features" id="how">
+  <section class="how" id="how">
     <div class="container">
-      <div class="features-header fade-up">
-        <p class="label" style="margin-bottom: 1rem;">How it works</p>
-        <h2 class="display-lg">Three steps from<br />scroll to <span class="teal-text">start</span>.</h2>
-        <p class="subhead" style="margin: 1.5rem auto 0;">
+      <div class="how-header fade-up">
+        <p class="label" style="margin-bottom: 1.5rem;">How it works</p>
+        <h2 class="display-lg">Three steps from<br />scroll to <span class="teal">start</span>.</h2>
+        <p class="subhead" style="margin-top: 1.5rem;">
           No login. No to-do list. No guilt. Just a circuit-breaker between you and the scroll.
         </p>
       </div>
 
-      <!-- Catch -->
-      <div class="feature-block fade-up">
-        <div>
-          <div class="feature-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="8"/>
-              <line x1="12" y1="12" x2="20" y2="12"/>
-              <path d="M12 12a5 5 0 1 0 0-10"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Catch</h3>
-          <p class="feature-desc">Detects autopilot scrolling within 3 seconds — before your brain catches up. It doesn't wait for you to notice.</p>
+      <div class="steps fade-up">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Catch</h3>
+          <p class="step-desc">Detects autopilot scrolling within 3 seconds — before your brain catches up.</p>
         </div>
-        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
-          <div class="feature-visual-inner">
-            <svg width="120" height="120" viewBox="0 0 100 100" fill="none">
-              <circle cx="50" cy="50" r="32" stroke="var(--teal)" stroke-width="1" opacity="0.2"/>
-              <circle cx="50" cy="50" r="22" stroke="var(--teal)" stroke-width="1" opacity="0.4"/>
-              <circle cx="50" cy="50" r="10" fill="var(--teal)"/>
-              <line x1="50" y1="18" x2="50" y2="40" stroke="var(--teal)" stroke-width="2"/>
-              <circle cx="50" cy="15" r="4" fill="var(--orange)"/>
-            </svg>
-          </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Ask</h3>
+          <p class="step-desc">One question. No guilt, no complex prompts — just "Lock in for 15 minutes?"</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Lock</h3>
+          <p class="step-desc">Your phone locks to the task. No shortcuts, no escape until the timer expires.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Ask -->
-      <div class="feature-block reverse fade-up">
-        <div>
-          <div class="feature-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9 9a3 3 0 1 1 5.53.72"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Ask</h3>
-          <p class="feature-desc">One question. No guilt, no complex prompts — just "Lock in for 15 minutes?" You either commit or keep scrolling.</p>
+  <hr class="divider" />
+
+  <!-- The Moment -->
+  <section class="moment">
+    <div class="container">
+      <div class="moment-grid">
+        <div class="fade-up">
+          <p class="label" style="margin-bottom: 1.5rem;">The moment it works</p>
+          <h2 class="moment-title">
+            Your finger reaches for the scroll before your brain catches up. UNMINDY is already there.
+          </h2>
+          <p class="subhead">
+            The interrupt appears in under a second. A full-screen teal overlay with one question. You either commit or keep scrolling.
+          </p>
         </div>
-        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
-          <div class="feature-visual-inner">
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 2.2rem; text-align: center;">
-              <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.2rem; font-weight: 500;">Lock in for 15 minutes?</p>
-              <div style="display: flex; gap: 0.6rem; justify-content: center;">
-                <div style="background: var(--teal); color: #000; padding: 0.5rem 1.3rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700;">Yes</div>
-                <div style="border: 1px solid var(--border); padding: 0.5rem 1.3rem; border-radius: 999px; font-size: 0.8rem; color: var(--text-dim);">No</div>
+
+        <div class="moment-visual fade-up">
+          <div class="phone-wrapper" style="position: relative; width: 260px;">
+            <div class="phone-glow"></div>
+            <div class="phone-body">
+              <div class="phone-screen">
+                <div class="interrupt-overlay visible" id="momentOverlay">
+                  <h3>Scrolling again?</h3>
+                  <p>Lock in for 15 minutes.<br />Get back to work.</p>
+                  <button class="lock-btn">Lock me in</button>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lock -->
-      <div class="feature-block fade-up">
-        <div>
-          <div class="feature-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="10" rx="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Lock</h3>
-          <p class="feature-desc">Your phone locks to the task. No shortcuts, no escape. When the timer expires, you're free — but you might want to keep going.</p>
-        </div>
-        <div class="feature-visual" style="background: linear-gradient(145deg, #050505 0%, #0f0f0f 100%);">
-          <div class="feature-visual-inner">
-            <div style="text-align: center;">
-              <div style="font-size: 4rem; font-weight: 900; color: var(--teal-bright); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;">14:42</div>
-              <div style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.5rem; font-weight: 500;">Reading: Chapter 3</div>
-              <div style="font-size: 0.65rem; color: var(--text-faint); margin-top: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;">UNMINDY · Focus locked</div>
             </div>
           </div>
         </div>
@@ -830,12 +782,14 @@
     </div>
   </section>
 
+  <hr class="divider" />
+
   <!-- Stats -->
   <section class="stats-band">
     <div class="container">
-      <div class="stats-grid">
+      <div class="stats-row">
         <div class="fade-up">
-          <div class="stat-num" data-target="1247" data-suffix="">0</div>
+          <div class="stat-num" data-target="1247">0</div>
           <div class="stat-label">Early adopters</div>
         </div>
         <div class="fade-up">
@@ -850,12 +804,14 @@
     </div>
   </section>
 
+  <hr class="divider" />
+
   <!-- CTA -->
-  <section class="cta-section" id="cta">
+  <section class="cta" id="cta">
     <div class="container cta-inner">
       <div class="fade-up">
-        <p class="label" style="margin-bottom: 1rem;">Join the waitlist</p>
-        <h2 class="cta-title">Stop saying <span class="accent">later.</span></h2>
+        <p class="label" style="margin-bottom: 1.5rem;">Join the waitlist</p>
+        <h2 class="cta-title">Stop saying <span class="teal">later.</span></h2>
         <p class="cta-desc">Leave your email. We'll reach out when it's ready — no spam, no noise, just the work.</p>
 
         <form id="waitlistForm" class="cta-form">
@@ -873,7 +829,7 @@
         </form>
 
         <p class="success-msg" id="formSuccess">You're on the list. We'll be in touch.</p>
-        <p style="font-size: 0.75rem; color: var(--text-faint); margin-top: 1rem; letter-spacing: 0.04em;">No spam. One email when we launch.</p>
+        <p style="font-size: 0.75rem; color: var(--text-faint); margin-top: 1.5rem; letter-spacing: 0.04em;">No spam. One email when we launch.</p>
       </div>
     </div>
   </section>
@@ -893,7 +849,6 @@
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
 
-            // Trigger counter animations
             entry.target.querySelectorAll('[data-target]').forEach(function(el) {
               animateCounter(el);
             });
@@ -901,7 +856,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
       document.querySelectorAll('.fade-up').forEach(function(el) {
         observer.observe(el);
@@ -915,13 +870,13 @@
         var target = parseFloat(el.getAttribute('data-target'));
         var suffix = el.getAttribute('data-suffix') || '';
         var decimal = parseInt(el.getAttribute('data-decimal') || '0', 10);
-        var duration = 1500;
+        var duration = 1800;
         var start = performance.now();
 
         function step(now) {
           var elapsed = now - start;
           var progress = Math.min(elapsed / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 4);
+          var eased = 1 - Math.pow(1 - progress, 3);
           var current = target * eased;
 
           el.textContent = current.toFixed(decimal) + suffix;
@@ -936,7 +891,7 @@
         requestAnimationFrame(step);
       }
 
-      // ===== Phone Animation Sequence =====
+      // ===== Phone Animation =====
       var interruptOverlay = document.getElementById('interruptOverlay');
       var lockinScreen = document.getElementById('lockinScreen');
       var lockBtn = document.getElementById('lockBtn');
@@ -961,13 +916,13 @@
         state = 'idle';
         clearInterval(timerInterval);
         timerRunning = false;
-        setTimeout(showInterrupt, 400);
+        setTimeout(showInterrupt, 500);
       }
 
       setTimeout(function() {
         showInterrupt();
-        setTimeout(showLockin, 2500);
-      }, 1000);
+        setTimeout(showLockin, 2800);
+      }, 1200);
 
       if (lockBtn) lockBtn.addEventListener('click', showLockin);
       if (lockinScreen) lockinScreen.addEventListener('click', resetAnimation);
@@ -996,15 +951,14 @@
         if (el) el.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
       }
 
-      // ===== Form (instant success) =====
+      // ===== Form =====
       var form = document.getElementById('waitlistForm');
       var successEl = document.getElementById('formSuccess');
 
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          var emailInput = document.getElementById('email');
-          var email = emailInput.value.trim();
+          var email = document.getElementById('email').value.trim();
 
           if (email && email.includes('@')) {
             form.style.display = 'none';
