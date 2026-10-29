@@ -543,9 +543,12 @@
     @media (max-width: 768px) {
       .hero { align-items: center; padding-top: 6rem; padding-bottom: 5rem; }
       .phone-wrapper { display: none; }
-      .hero-meta { flex-direction: column; align-items: flex-start; gap: 2rem; }
-      .hero-cta { width: 100%; }
-      .btn-primary, .btn-ghost { flex: 1; justify-content: center; }
+      .hero-title { text-align: center; }
+      .hero-desc { text-align: center; max-width: 32rem; margin-left: auto; margin-right: auto; }
+      .hero-meta { flex-direction: column; align-items: center; gap: 1.5rem; }
+      .hero-cta { width: 100%; flex-direction: column; }
+      .btn-primary, .btn-ghost { flex: none; width: 100%; justify-content: center; }
+      .btn-ghost { border-color: #333; color: #777; }
       .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
       .moment-grid { grid-template-columns: 1fr; gap: 3rem; }
       .steps { grid-template-columns: 1fr; gap: 2px; }
@@ -553,6 +556,7 @@
       .cta-form { flex-direction: column; }
       section { padding-block: 5rem; }
       .problem, .how, .moment, .cta { padding-block: 6rem; }
+      .nav-cta { display: none; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
