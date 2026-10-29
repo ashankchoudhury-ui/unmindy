@@ -22,7 +22,7 @@
       --text-dim: #555;
       --text-faint: #333;
       --teal: #0d9488;
-      --teal-glow: rgba(13, 148, 136, 0.2);
+      --teal-glow: rgba(13, 148, 136, 0.15);
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
@@ -76,7 +76,7 @@
       font-weight: 400;
       color: var(--text-dim);
       line-height: 1.75;
-      max-width: 34rem;
+      max-width: 32rem;
     }
 
     .teal { color: var(--teal); }
@@ -97,12 +97,11 @@
     .btn-primary {
       background: var(--text);
       color: var(--bg);
-      box-shadow: 0 0 30px var(--teal-glow);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 50px var(--teal-glow);
+      background: #fff;
+      transform: translateY(-1px);
     }
 
     .btn-primary:active { transform: scale(0.97); }
@@ -152,13 +151,6 @@
       position: relative;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 50% 40% at 85% 15%, var(--teal-glow) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
     .hero-inner { position: relative; width: 100%; }
 
     .hero-title {
@@ -188,73 +180,49 @@
 
     .hero-cta { display: flex; gap: 1rem; flex-shrink: 0; }
 
-    /* ===== PHONE MOCKUP ===== */
+    /* ===== PHONE MOCKUP (FLAT, NO 3D) ===== */
     .phone-wrapper {
       position: absolute;
       top: 10%;
       right: 3%;
-      width: 300px;
+      width: 280px;
       z-index: 1;
     }
 
-    .phone-glow {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 260px; height: 480px;
-      background: radial-gradient(ellipse, var(--teal-glow) 0%, transparent 70%);
-      filter: blur(60px);
-      animation: phonePulse 4s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes phonePulse {
-      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-    }
-
     .phone-body {
-      background: linear-gradient(160deg, #111, #080808);
-      border-radius: 40px;
+      background: #0a0a0a;
+      border-radius: 36px;
       padding: 10px;
-      box-shadow:
-        0 0 0 1.5px #222,
-        0 0 0 4px #050505,
-        0 50px 120px rgba(0, 0, 0, 0.95),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      transform: perspective(1200px) rotateY(-15deg) rotateX(4deg);
-      transition: transform 0.6s ease;
-    }
-
-    .phone-body:hover {
-      transform: perspective(1200px) rotateY(-5deg) rotateX(1deg);
+      border: 1px solid #1a1a1a;
+      box-shadow: 0 60px 100px rgba(0, 0, 0, 0.8);
+      position: relative;
     }
 
     .phone-body::before {
       content: "";
       position: absolute;
       top: 10px; left: 50%; transform: translateX(-50%);
-      width: 110px; height: 26px;
-      background: #060606;
-      border-radius: 0 0 20px 20px;
+      width: 100px; height: 24px;
+      background: #050505;
+      border-radius: 0 0 18px 18px;
       z-index: 10;
     }
 
     .phone-screen {
       background: #000;
-      border-radius: 30px;
+      border-radius: 26px;
       overflow: hidden;
       aspect-ratio: 9 / 19.5;
       position: relative;
     }
 
     /* Feed */
-    .app-feed { padding: 28px 12px 0; height: 100%; position: relative; z-index: 1; }
+    .app-feed { padding: 28px 12px 0; height: 100%; }
 
     .feed-card {
       display: flex; gap: 10px; margin-bottom: 14px;
-      opacity: 0; transform: translateY(8px);
-      animation: cardIn 0.6s ease forwards;
+      opacity: 0; transform: translateY(6px);
+      animation: cardIn 0.5s ease forwards;
     }
 
     .feed-card:nth-child(1) { animation-delay: 0.6s; }
@@ -276,13 +244,13 @@
     .feed-line.w60 { width: 60%; }
     .feed-line.w80 { width: 80%; }
     .feed-line.w100 { width: 100%; }
-    .feed-img { width: 100%; height: 65px; background: #0a0a0a; border-radius: 8px; margin-top: 5px; border: 1px solid #151515; }
+    .feed-img { width: 100%; height: 60px; background: #0a0a0a; border-radius: 8px; margin-top: 5px; border: 1px solid #151515; }
 
     /* Interrupt */
     .interrupt-overlay {
       position: absolute; inset: 0;
       background: var(--teal);
-      border-radius: 30px;
+      border-radius: 26px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 1rem;
@@ -296,7 +264,7 @@
 
     .interrupt-overlay.visible { opacity: 1; pointer-events: auto; }
 
-    .interrupt-overlay h3 { font-size: 1.3rem; font-weight: 800; color: #000; letter-spacing: -0.02em; }
+    .interrupt-overlay h3 { font-size: 1.25rem; font-weight: 800; color: #000; letter-spacing: -0.02em; }
     .interrupt-overlay p { font-size: 0.85rem; color: #000; opacity: 0.65; line-height: 1.5; }
 
     .lock-btn {
@@ -314,8 +282,8 @@
     /* Lock-in */
     .lockin-screen {
       position: absolute; inset: 0;
-      background: radial-gradient(circle at center, #080808 0%, #000 100%);
-      border-radius: 30px;
+      background: #000;
+      border-radius: 26px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 1rem;
@@ -327,7 +295,7 @@
     .lockin-screen.visible { opacity: 1; pointer-events: auto; }
 
     .lockin-timer {
-      font-size: 3.2rem;
+      font-size: 3rem;
       font-weight: 900;
       color: var(--teal);
       font-variant-numeric: tabular-nums;
@@ -337,7 +305,7 @@
     .lockin-task { font-size: 0.9rem; font-weight: 500; color: var(--text-dim); }
     .lockin-label { font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.12em; }
 
-    /* ===== SECTION DIVIDER ===== */
+    /* ===== DIVIDER ===== */
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
     /* ===== PROBLEM ===== */
@@ -345,13 +313,13 @@
 
     .problem-grid {
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 4rem;
       align-items: start;
     }
 
     .problem-stat {
-      font-size: clamp(4rem, 8vw, 7rem);
+      font-size: clamp(3.5rem, 7vw, 6rem);
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 0.9;
@@ -359,7 +327,7 @@
     }
 
     .problem-title {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
@@ -382,16 +350,16 @@
     }
 
     .data-value {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
       font-variant-numeric: tabular-nums;
     }
 
     .data-label {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-faint);
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -416,7 +384,6 @@
     .step {
       background: var(--bg);
       padding: 3rem 2.5rem;
-      position: relative;
     }
 
     .step-num {
@@ -462,38 +429,10 @@
     .moment-visual {
       display: flex;
       justify-content: center;
-      align-items: center;
     }
 
-    /* ===== STATS BAND ===== */
-    .stats-band {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding-block: 4rem;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      color: var(--text-faint);
-      margin-top: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 500;
+    .phone-moment {
+      width: 260px;
     }
 
     /* ===== CTA ===== */
@@ -589,14 +528,13 @@
       .problem-grid { grid-template-columns: 1fr; gap: 3rem; }
       .moment-grid { grid-template-columns: 1fr; gap: 3rem; }
       .steps { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: 1fr; gap: 2rem; }
       .cta-form { flex-direction: column; }
       section { padding-block: 4rem; }
       .how, .moment, .problem, .cta { padding-block: 5rem; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-      .phone-wrapper { width: 240px; right: 2%; }
+      .phone-wrapper { width: 220px; right: 1%; }
     }
   </style>
 </head>
@@ -613,7 +551,6 @@
   <!-- Hero -->
   <section class="hero">
     <div class="phone-wrapper">
-      <div class="phone-glow"></div>
       <div class="phone-body">
         <div class="phone-screen">
           <div class="app-feed">
@@ -765,9 +702,8 @@
         </div>
 
         <div class="moment-visual fade-up">
-          <div class="phone-wrapper" style="position: relative; width: 260px;">
-            <div class="phone-glow"></div>
-            <div class="phone-body">
+          <div class="phone-moment">
+            <div class="phone-body" style="position: relative;">
               <div class="phone-screen">
                 <div class="interrupt-overlay visible" id="momentOverlay">
                   <h3>Scrolling again?</h3>
@@ -777,28 +713,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- Stats -->
-  <section class="stats-band">
-    <div class="container">
-      <div class="stats-row">
-        <div class="fade-up">
-          <div class="stat-num" data-target="1247">0</div>
-          <div class="stat-label">Early adopters</div>
-        </div>
-        <div class="fade-up">
-          <div class="stat-num" data-target="4.2" data-suffix="h" data-decimal="1">0h</div>
-          <div class="stat-label">Focus saved weekly</div>
-        </div>
-        <div class="fade-up">
-          <div class="stat-num" data-target="89" data-suffix="%">0%</div>
-          <div class="stat-label">Completion rate</div>
         </div>
       </div>
     </div>
@@ -848,11 +762,6 @@
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
-
-            entry.target.querySelectorAll('[data-target]').forEach(function(el) {
-              animateCounter(el);
-            });
-
             observer.unobserve(entry.target);
           }
         });
@@ -861,35 +770,6 @@
       document.querySelectorAll('.fade-up').forEach(function(el) {
         observer.observe(el);
       });
-
-      // ===== Counter Animation =====
-      function animateCounter(el) {
-        if (el.dataset.animated) return;
-        el.dataset.animated = 'true';
-
-        var target = parseFloat(el.getAttribute('data-target'));
-        var suffix = el.getAttribute('data-suffix') || '';
-        var decimal = parseInt(el.getAttribute('data-decimal') || '0', 10);
-        var duration = 1800;
-        var start = performance.now();
-
-        function step(now) {
-          var elapsed = now - start;
-          var progress = Math.min(elapsed / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var current = target * eased;
-
-          el.textContent = current.toFixed(decimal) + suffix;
-
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          } else {
-            el.textContent = target.toFixed(decimal) + suffix;
-          }
-        }
-
-        requestAnimationFrame(step);
-      }
 
       // ===== Phone Animation =====
       var interruptOverlay = document.getElementById('interruptOverlay');
