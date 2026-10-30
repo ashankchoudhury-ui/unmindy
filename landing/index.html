@@ -121,20 +121,11 @@
     }
 
     .nav-inner {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: center; align-items: center;
     }
 
     .nav-logo { line-height: 0; }
     .nav-logo img { height: 20px; width: auto; display: block; }
-
-    .nav-cta {
-      font-size: 0.8rem; font-weight: 500; color: var(--text-dim);
-      padding: 0.5rem 1.2rem; border-radius: 999px;
-      border: 1px solid var(--border);
-      transition: all 0.2s ease;
-    }
-
-    .nav-cta:hover { color: var(--text); border-color: #333; }
 
     /* ===== HERO ===== */
     .hero {
@@ -556,7 +547,6 @@
       .cta-form { flex-direction: column; }
       section { padding-block: 5rem; }
       .problem, .how, .moment, .cta { padding-block: 6rem; }
-      .nav-cta { display: none; }
       .nav-inner { justify-content: center; }
     }
 
@@ -573,7 +563,6 @@
       <a href="#" class="nav-logo">
         <img src="assets/unmindy-logo.svg" alt="UNMINDY" width="120" height="24" />
       </a>
-      <a href="#cta" class="nav-cta">Join waitlist</a>
     </div>
   </nav>
 
