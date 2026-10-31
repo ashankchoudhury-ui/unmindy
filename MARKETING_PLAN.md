@@ -104,8 +104,78 @@ Body: I'm a 15-year-old student from India. I built UNMINDY because I kept openi
 - Reddit upvotes/comments
 - DM response rate
 
-## Blockers
-- Formspree endpoint needs real account (user action)
-- X/YouTube/Reddit automation blocked (manual only)
-- No budget for ads
-- Low-end phone limits content creation (use PC for video editing)
+## Additional Channels (from research)
+
+### Product Hunt Launch (Free, High Impact)
+- Post from personal account (company accounts can't)
+- Goes live 12:01 AM Pacific
+- Need 2 gallery images + 260-char description
+- Write first comment yourself, stay all day answering
+- A single PH launch brings dozens to hundreds of signups
+- Timeline: Week 3-4 (after you have some users and feedback)
+
+### Smol Launch (Free)
+- Free weekly launches with verified-maker audience
+- Smaller but targeted tech audience
+- Timeline: Week 2
+
+### Discord/Slack Communities (Free, Ongoing)
+Join these servers and be helpful before mentioning UNMINDY:
+- Productivity-focused Discord servers
+- Student communities
+- Indie hacker Discords
+- ADHD/focus communities
+- Rule: 10 helpful messages before 1 self-promo
+
+### BetaList (Paid, optional)
+- Paid submission, refunded if not selected
+- Good for steady trickle of early adopters
+- Cost: Check submission form for price
+
+### TikTok / YouTube Shorts (Free)
+- Post the same Reels content to TikTok and Shorts
+- Short-form video every day if possible
+- Platforms recommend new accounts to non-followers for free
+
+### Hacker News Show HN (Free, but needs web demo)
+- HN rejects landing pages and sign-up pages
+- Need a no-account demo people can try
+- UNMINDY is a waitlist, so this won't work until there's a live demo
+- Timeline: After app is built
+
+## Updated Week-by-Week Plan
+
+### Week 1: Fix + Seed (Target: 10 users)
+- Form is now live (tunnel-based email collector)
+- DM 20 friends/classmates
+- Post 2 Instagram Reels + TikTok/Shorts
+- Post 1 Reddit thread (r/productivity)
+- Join 3 Discord servers, be helpful
+
+### Week 2: Content + Communities (Target: 25 users)
+- Post 3 Instagram Reels + TikTok/Shorts
+- Post 2 Reddit threads (different subs)
+- Smol Launch submission
+- Indie Hackers post
+- Join 2 more Discord servers
+
+### Week 3: Launch Spike (Target: 40 users)
+- Product Hunt launch
+- Post 3 Instagram Reels + TikTok/Shorts
+- Ask early users for feedback
+- Improve landing page based on feedback
+- Post 1 more Reddit thread
+
+### Week 4: Push to 50 (Target: 50 users)
+- Final push on all channels
+- Ask users to share with friends
+- Consider BetaList submission
+- Evaluate what worked, double down
+
+## Key Insight from Research
+"Start with the 20 to 50 people you can reach directly. A personal message beats a broadcast post every time."
+
+Your fastest path to 50 users is still:
+1. DM 20-30 people personally
+2. Post content consistently
+3. Launch on Product Hunt in Week 3
