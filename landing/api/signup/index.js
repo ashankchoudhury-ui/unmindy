@@ -1,6 +1,4 @@
-const { put, get } = require('@vercel/blob');
-
-const BLOB_KEY = 'signups.json';
+const { put, list } = require('@vercel/blob');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -26,31 +24,10 @@ module.exports = async function handler(req, res) {
     };
 
     try {
-      // Get existing signups
-      let signups = [];
-      try {
-        const existing = await get(BLOB_KEY);
-        if (existing && existing.blob) {
-          const text = await existing.blob.text();
-          signups = JSON.parse(text);
-          if (!Array.isArray(signups)) signups = [];
-        }
-      } catch (e) {
-        // File doesn't exist yet, start fresh
-        signups = [];
-      }
-
-      // Check for duplicates
-      const isDuplicate = signups.some(s => s.email === normalizedEmail);
-      if (isDuplicate) {
-        return res.status(200).json({ ok: true, message: 'Already registered' });
-      }
-
-      // Add new signup
-      signups.push(registration);
-
-      // Save back to Blob
-      await put(BLOB_KEY, JSON.stringify(signups, null, 2), {
+      // Store each registration as a separate file to avoid race conditions
+      const filename = `signup-${Date.now()}-${Math.random().toString(36).substr(2, 5)}.json`;
+      
+      await put(filename, JSON.stringify(registration), {
         access: 'private',
         contentType: 'application/json'
       });
