@@ -1,4 +1,4 @@
-const { put, list } = require('@vercel/blob');
+const { put, get, list } = require('@vercel/blob');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,9 +30,12 @@ module.exports = async function handler(req, res) {
         const { blobs } = await list({ prefix: 'signup-' });
         for (const blob of blobs) {
           try {
-            const response = await fetch(blob.url);
-            const data = await response.json();
-            signups.push(data);
+            const result = await get(blob.url);
+            if (result && result.blob) {
+              const text = await result.blob.text();
+              const data = JSON.parse(text);
+              signups.push(data);
+            }
           } catch (e) {
             // Skip unreadable files
           }
