@@ -32,15 +32,20 @@ module.exports = async function handler(req, res) {
       try {
         console.log('Attempting to get existing signups from Blob...');
         const existing = await get(BLOB_KEY, { access: 'private' });
-        console.log('Get result:', existing ? 'found' : 'not found');
-        if (existing && existing.blob) {
-          const text = await existing.blob.text();
+        console.log('Get result status:', existing.statusCode);
+        
+        if (existing && existing.statusCode === 200 && existing.stream) {
+          const chunks = [];
+          for await (const chunk of existing.stream) {
+            chunks.push(chunk);
+          }
+          const text = Buffer.concat(chunks).toString('utf8');
           console.log('Existing content length:', text.length);
           signups = JSON.parse(text);
           if (!Array.isArray(signups)) signups = [];
         }
       } catch (getError) {
-        console.log('Get error:', getError.message, getError.code);
+        console.log('Get error:', getError.message);
         // File doesn't exist yet, start fresh
         signups = [];
       }
