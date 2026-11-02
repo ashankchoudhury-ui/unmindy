@@ -1,4 +1,6 @@
-const { put, get, list } = require('@vercel/blob');
+const { put, get } = require('@vercel/blob');
+
+const BLOB_KEY = 'signups.json';
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -24,36 +26,37 @@ module.exports = async function handler(req, res) {
     };
 
     try {
-      // Check for duplicates by listing existing signups
+      // Get existing signups
       let signups = [];
+      let existingContent = null;
+      
       try {
-        const { blobs } = await list({ prefix: 'signup-' });
-        for (const blob of blobs) {
-          try {
-            const result = await get(blob.url);
-            if (result && result.blob) {
-              const text = await result.blob.text();
-              const data = JSON.parse(text);
-              signups.push(data);
-            }
-          } catch (e) {
-            // Skip unreadable files
-          }
+        const result = await get(BLOB_KEY);
+        if (result && result.blob) {
+          existingContent = await result.blob.text();
+          signups = JSON.parse(existingContent);
+          if (!Array.isArray(signups)) signups = [];
         }
-      } catch (e) {
-        // No existing signups yet
+      } catch (getError) {
+        // File doesn't exist yet, start fresh
+        console.log('No existing signups file, starting fresh');
         signups = [];
       }
 
+      // Check for duplicates
       const isDuplicate = signups.some(s => s.email === normalizedEmail);
       if (isDuplicate) {
         return res.status(200).json({ ok: true, message: 'Already registered' });
       }
 
-      // Store each registration as a separate file to avoid race conditions
-      const filename = `signup-${Date.now()}-${Math.random().toString(36).substr(2, 5)}.json`;
+      // Add new signup
+      signups.push(registration);
+
+      // Save back to Blob
+      const newContent = JSON.stringify(signups, null, 2);
+      console.log('Saving signups:', newContent.length, 'bytes');
       
-      await put(filename, JSON.stringify(registration), {
+      await put(BLOB_KEY, newContent, {
         access: 'private',
         contentType: 'application/json'
       });
@@ -61,7 +64,8 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ 
         ok: true, 
         code: 'sprint-' + Math.random().toString(36).substr(2, 5),
-        message: 'Registration successful'
+        message: 'Registration successful',
+        total: signups.length
       });
 
     } catch (blobError) {
