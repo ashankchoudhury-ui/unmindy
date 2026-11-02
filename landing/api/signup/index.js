@@ -40,23 +40,28 @@ module.exports = async function handler(req, res) {
       }
 
       // Check each existing signup for duplicates
-      const isDuplicate = await Promise.any(existing.map(async (blob) => {
-        try {
-          const result = await get(blob.pathname, { access: 'private' });
-          if (result && result.stream) {
-            const chunks = [];
-            for await (const chunk of result.stream) {
-              chunks.push(chunk);
+      let isDuplicate = false;
+      if (existing.length > 0) {
+        for (const blob of existing) {
+          try {
+            const result = await get(blob.pathname, { access: 'private' });
+            if (result && result.stream) {
+              const chunks = [];
+              for await (const chunk of result.stream) {
+                chunks.push(chunk);
+              }
+              const text = Buffer.concat(chunks).toString('utf8');
+              const data = JSON.parse(text);
+              if (data.email === normalizedEmail) {
+                isDuplicate = true;
+                break;
+              }
             }
-            const text = Buffer.concat(chunks).toString('utf8');
-            const data = JSON.parse(text);
-            return data.email === normalizedEmail;
+          } catch (e) {
+            // Skip this blob if we can't read it
           }
-          return false;
-        } catch (e) {
-          return false;
         }
-      }));
+      }
 
       if (isDuplicate) {
         console.log('Duplicate found');
