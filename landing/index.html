@@ -888,6 +888,9 @@
           var ref = getReferralCode() || document.getElementById('email').getAttribute('data-ref') || '';
 
           if (email && email.includes('@')) {
+            // Track signup attempt
+            track('signup_attempt', { email_domain: email.split('@')[1] });
+
             form.style.display = 'none';
             if (successEl) {
               successEl.style.display = 'block';
@@ -900,10 +903,32 @@
               method: 'POST',
               body: JSON.stringify({ email: email, referred_by: ref }),
               headers: { 'Content-Type': 'application/json' }
-            }).catch(function() {});
+            }).then(function(res) {
+              track('signup_complete', { success: res.ok });
+            }).catch(function() {
+              track('signup_error', { error: 'network' });
+            });
           }
         });
       }
+
+      // ===== Analytics =====
+      function track(event, data) {
+        try {
+          fetch('/api/analytics', {
+            method: 'POST',
+            body: JSON.stringify({ event, data }),
+            headers: { 'Content-Type': 'application/json' }
+          }).catch(function() {});
+        } catch (e) {}
+      }
+
+      // Track page view
+      track('page_view', {
+        path: window.location.pathname,
+        ref: getReferralCode(),
+        source: document.referrer || 'direct'
+      });
 
       // ===== Smooth scroll =====
       document.querySelectorAll('a[href^="#"]').forEach(function(link) {
