@@ -30,7 +30,7 @@ module.exports = async function handler(req, res) {
       let signups = [];
       
       try {
-        const existing = await get(BLOB_KEY);
+        const existing = await get(BLOB_KEY, { access: 'private' });
         if (existing && existing.blob) {
           const text = await existing.blob.text();
           signups = JSON.parse(text);
