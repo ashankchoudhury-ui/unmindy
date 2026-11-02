@@ -28,13 +28,12 @@ module.exports = async function handler(req, res) {
     try {
       // Get existing signups
       let signups = [];
-      let existingContent = null;
       
       try {
-        const result = await get(BLOB_KEY);
-        if (result && result.blob) {
-          existingContent = await result.blob.text();
-          signups = JSON.parse(existingContent);
+        const existing = await get(BLOB_KEY);
+        if (existing && existing.blob) {
+          const text = await existing.blob.text();
+          signups = JSON.parse(text);
           if (!Array.isArray(signups)) signups = [];
         }
       } catch (getError) {
@@ -52,13 +51,14 @@ module.exports = async function handler(req, res) {
       // Add new signup
       signups.push(registration);
 
-      // Save back to Blob
+      // Save back to Blob with overwrite allowed
       const newContent = JSON.stringify(signups, null, 2);
       console.log('Saving signups:', newContent.length, 'bytes');
       
       await put(BLOB_KEY, newContent, {
         access: 'private',
-        contentType: 'application/json'
+        contentType: 'application/json',
+        allowOverwrite: true
       });
 
       return res.status(200).json({ 
