@@ -30,20 +30,24 @@ module.exports = async function handler(req, res) {
       let signups = [];
       
       try {
+        console.log('Attempting to get existing signups from Blob...');
         const existing = await get(BLOB_KEY, { access: 'private' });
+        console.log('Get result:', existing ? 'found' : 'not found');
         if (existing && existing.blob) {
           const text = await existing.blob.text();
+          console.log('Existing content length:', text.length);
           signups = JSON.parse(text);
           if (!Array.isArray(signups)) signups = [];
         }
       } catch (getError) {
+        console.log('Get error:', getError.message, getError.code);
         // File doesn't exist yet, start fresh
-        console.log('No existing signups file, starting fresh');
         signups = [];
       }
 
       // Check for duplicates
       const isDuplicate = signups.some(s => s.email === normalizedEmail);
+      console.log('Duplicate check:', isDuplicate, 'signups count:', signups.length);
       if (isDuplicate) {
         return res.status(200).json({ ok: true, message: 'Already registered' });
       }
