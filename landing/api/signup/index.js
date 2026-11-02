@@ -24,6 +24,29 @@ module.exports = async function handler(req, res) {
     };
 
     try {
+      // Check for duplicates by listing existing signups
+      let signups = [];
+      try {
+        const { blobs } = await list({ prefix: 'signup-' });
+        for (const blob of blobs) {
+          try {
+            const response = await fetch(blob.url);
+            const data = await response.json();
+            signups.push(data);
+          } catch (e) {
+            // Skip unreadable files
+          }
+        }
+      } catch (e) {
+        // No existing signups yet
+        signups = [];
+      }
+
+      const isDuplicate = signups.some(s => s.email === normalizedEmail);
+      if (isDuplicate) {
+        return res.status(200).json({ ok: true, message: 'Already registered' });
+      }
+
       // Store each registration as a separate file to avoid race conditions
       const filename = `signup-${Date.now()}-${Math.random().toString(36).substr(2, 5)}.json`;
       
