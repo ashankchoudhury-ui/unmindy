@@ -1,0 +1,8 @@
+file 'ch1.wav'
+file 'ch2.wav'
+file 'ch3.wav'
+file 'ch4.wav'
+file 'ch5.wav'
+file 'ch6.wav'
+file 'ch7.wav'
+file 'ch8.wav'

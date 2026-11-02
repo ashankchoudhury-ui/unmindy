@@ -1,0 +1,28 @@
+{
+  "objective": "24 verified pre-launch sign-ups in 24 hours",
+  "start_time": "2026-11-01T17:15:00Z",
+  "deadline": "2026-11-02T17:15:00Z",
+  "verified_signups": 1,
+  "remaining": 23,
+  "product": "UNMINDY - break the scroll, lock in the work",
+  "signup_url": "https://landing-nine-pi-85.vercel.app/",
+  "api_url": "https://7e4ba8d51bc3fb.lhr.life/signup",
+  "channels": [
+    "email",
+    "github",
+    "vercel",
+    "instagram"
+  ],
+  "current_strategy": "Targeted email outreach to focus/wellbeing tool builders + stable landing page",
+  "blockers": [
+    "instagram_token_expired",
+    "github_pages_not_enabled"
+  ],
+  "experiments": [
+    "cold_email_personalized_github_contributors",
+    "local_tunnel_stable",
+    "vercel_deployment_live"
+  ],
+  "emails_sent": 275,
+  "last_action": "Sent 12 targeted emails to ActivityWatch/Medito/Zenta contributors"
+}

@@ -1,0 +1,12 @@
+file 'scene-01.wav'
+duration 6
+file 'scene-02.wav'
+duration 6
+file 'scene-03.wav'
+duration 6
+file 'scene-04.wav'
+duration 8
+file 'scene-05.wav'
+duration 4
+file 'scene-06.wav'
+duration 5

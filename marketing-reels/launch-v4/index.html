@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNMINDY Launch Video</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #000; color: #f5f5f5; overflow: hidden; }
+    .scene { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+    .scene-content { width: 100%; height: 100%; position: relative; }
+    
+    /* Typography */
+    .display {
+      font-size: clamp(4rem, 14vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+    }
+    
+    .headline {
+      font-size: clamp(2.5rem, 9vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    
+    .label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #555;
+    }
+    
+    .dim { color: #555; }
+    
+    /* Geometric elements */
+    .geo-line {
+      height: 2px;
+      background: #f5f5f5;
+      transform-origin: left;
+    }
+    
+    .geo-circle {
+      border: 2px solid #f5f5f5;
+      border-radius: 50%;
+      position: absolute;
+    }
+    
+    .geo-square {
+      border: 2px solid #333;
+      position: absolute;
+    }
+    
+    /* Pause bars logo */
+    .pause-bars {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    
+    .pause-bar {
+      width: 18px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      transform-origin: top;
+    }
+    
+    /* Step circles */
+    .step-circle {
+      width: 110px;
+      height: 110px;
+      border: 3px solid #f5f5f5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      position: relative;
+    }
+    
+    .step-circle::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 1px solid #333;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    
+    /* Accent bar */
+    .accent-bar {
+      height: 4px;
+      background: #f5f5f5;
+      margin: 1.5rem auto;
+      transform-origin: center;
+    }
+    
+    /* Grid overlay */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(245,245,245,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,245,245,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    
+    /* Floating shapes */
+    .floating-shape {
+      position: absolute;
+      opacity: 0.15;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" data-composition-id="unmindy-launch-v4" data-duration="35">
+    <div class="scene-content" style="background: #000;">
+      <div class="grid-overlay"></div>
+      
+      <!-- Floating background shapes -->
+      <div id="bg-shapes" style="position: absolute; inset: 0; pointer-events: none; z-index: 0;">
+        <div class="floating-shape geo-circle" style="width: 200px; height: 200px; top: 10%; left: -50px; opacity: 0;"></div>
+        <div class="floating-shape geo-square" style="width: 150px; height: 150px; bottom: 20%; right: -30px; opacity: 0;"></div>
+      </div>
+      
+      <!-- Scene 1: Problem stat (0-4s) -->
+      <div id="scene1" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center; position: relative; z-index: 1;">
+          <div class="label" id="label1" style="opacity: 0; transform: translateY(20px);">The Average Person</div>
+          <div class="display" id="stat" style="opacity: 0; transform: scale(0.4) translateY(60px);">147<span style="font-size: 0.5em; vertical-align: super;">×</span></div>
+          <div class="accent-bar" id="bar1" style="width: 0; transform: scaleX(0);"></div>
+          <div class="dim" id="sub1" style="font-size: 1.1rem; letter-spacing: 0.15em; opacity: 0; transform: translateY(15px);">DAILY UNLOCKS</div>
+        </div>
+      </div>
+
+      <!-- Scene 2: Agitation (4-9s) -->
+      <div id="scene2" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; max-width: 900px; position: relative; z-index: 1;">
+          <div class="headline" id="agit-text" style="transform: translateY(40px); opacity: 0;">
+            Most of it<br />
+            <span class="dim">isn't even</span><br />
+            <span style="font-weight: 900;">your choice.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Realization (9-14s) -->
+      <div id="scene3" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; position: relative; z-index: 1;">
+          <div class="label" id="label3" style="opacity: 0; transform: translateY(20px);">The Problem</div>
+          <div class="headline" id="real-text" style="transform: translateY(50px); opacity: 0;">
+            Your brain<br />
+            is on <span style="font-weight: 900;">autopilot.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: Solution reveal (14-22s) -->
+      <div id="scene4" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; position: relative; z-index: 1;">
+          <div class="pause-bars" id="pause-bars">
+            <div class="pause-bar" style="height: 0; transform: scaleY(0);"></div>
+            <div class="pause-bar" style="height: 0; transform: scaleY(0);"></div>
+          </div>
+          <div class="display" id="wordmark" style="opacity: 0; transform: translateY(40px); font-size: clamp(3rem, 11vw, 8rem);">UNMINDY</div>
+          <div class="accent-bar" id="bar2" style="width: 0; transform: scaleX(0);"></div>
+          <div class="dim" id="sol-sub" style="font-size: 1rem; letter-spacing: 0.15em; opacity: 0; transform: translateY(15px);">CATCHES YOU IN 3 SECONDS</div>
+        </div>
+      </div>
+
+      <!-- Scene 5: How it works (22-28s) -->
+      <div id="scene5" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; position: relative; z-index: 1;">
+          <div style="display: flex; gap: 4rem; justify-content: center; margin-bottom: 3rem;">
+            <div class="step-circle" id="step1" style="opacity: 0; transform: scale(0.3);">C</div>
+            <div class="step-circle" id="step2" style="opacity: 0; transform: scale(0.3);">A</div>
+            <div class="step-circle" id="step3" style="opacity: 0; transform: scale(0.3);">L</div>
+          </div>
+          <div class="headline" id="steps-text" style="font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: -0.02em; opacity: 0; transform: translateY(30px);">
+            Catch. Ask. Lock.
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 6: CTA (28-35s) -->
+      <div id="scene6" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; position: relative; z-index: 1;">
+          <div class="display" id="cta-wordmark" style="font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 1rem; opacity: 0; transform: scale(0.7);">UNMINDY</div>
+          <div class="accent-bar" id="bar3" style="width: 0; transform: scaleX(0); margin: 0 auto 1.5rem;"></div>
+          <div id="cta-line1" style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; opacity: 0; transform: translateY(20px);">Break the scroll.</div>
+          <div id="cta-line2" style="font-size: 0.9rem; color: #555; opacity: 0; transform: translateY(15px);">landing-nine-pi-85.vercel.app</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="narration" src="assets/narration-timed.wav" preload="auto"></audio>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    
+    // SFX generators
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx;
+    
+    function playClick() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = 900;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.08);
+    }
+    
+    function playWhoosh() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      const bufferSize = audioCtx.sampleRate * 0.25;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 3);
+      }
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = 800;
+      filter.Q.value = 1;
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      noise.start();
+    }
+    
+    function playDing() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = 1400;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.6);
+    }
+    
+    function playPop() {
+      if (!audioCtx) audioCtx = new AudioCtx();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.1);
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+    
+    const tl = gsap.timeline({ paused: true });
+    
+    // Floating background shapes
+    tl.to('#bg-shapes .floating-shape', { opacity: 0.15, duration: 1 }, 0)
+      .to('#bg-shapes .floating-shape:first-child', { rotation: 15, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' }, 0)
+      .to('#bg-shapes .floating-shape:last-child', { rotation: -20, duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut' }, 0);
+    
+    // Scene 1: Problem stat (0-4s)
+    tl.fromTo('#scene1', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0)
+      .call(playClick, [], 0.2)
+      .fromTo('#label1', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 0.3)
+      .fromTo('#stat', { opacity: 0, scale: 0.4, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: 'back.out(1.4)' }, 0.5)
+      .call(playPop, [], 0.5)
+      .fromTo('#bar1', { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power3.out' }, 1.2)
+      .call(playClick, [], 1.2)
+      .fromTo('#sub1', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 1.6)
+      .to('#stat', { scale: 1.03, duration: 0.3, repeat: 1, yoyo: true }, 2.5);
+    
+    // Scene 2: Agitation (4-9s)
+    tl.call(playWhoosh, [], 4)
+      .to('#scene1', { opacity: 0, duration: 0.3 }, 4)
+      .fromTo('#scene2', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.3)
+      .from('#agit-text', { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out' }, 4.5)
+      .to('#agit-text', { scale: 1.03, duration: 0.4, repeat: 1, yoyo: true }, 7);
+    
+    // Scene 3: Realization (9-14s)
+    tl.call(playWhoosh, [], 9)
+      .to('#scene2', { opacity: 0, duration: 0.3 }, 9)
+      .fromTo('#scene3', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 9.3)
+      .fromTo('#label3', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 9.5)
+      .from('#real-text', { y: 50, opacity: 0, duration: 1, ease: 'power3.out' }, 9.7)
+      .to('#real-text span', { scale: 1.1, duration: 0.3, repeat: 1, yoyo: true }, 12);
+    
+    // Scene 4: Solution (14-22s)
+    tl.call(playWhoosh, [], 14)
+      .to('#scene3', { opacity: 0, duration: 0.3 }, 14)
+      .fromTo('#scene4', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 14.3)
+      .to('#pause-bars .pause-bar:first-child', { height: 100, duration: 0.6, ease: 'back.out(2.5)' }, 14.6)
+      .call(playPop, [], 14.6)
+      .to('#pause-bars .pause-bar:last-child', { height: 100, duration: 0.6, ease: 'back.out(2.5)' }, 14.9)
+      .call(playPop, [], 14.9)
+      .fromTo('#wordmark', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 15.4)
+      .call(playClick, [], 15.4)
+      .fromTo('#bar2', { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'power3.out' }, 16)
+      .call(playClick, [], 16)
+      .fromTo('#sol-sub', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 16.5)
+      .to('#pause-bars .pause-bar', { y: -3, duration: 0.4, repeat: 1, yoyo: true }, 18);
+    
+    // Scene 5: How it works (22-28s)
+    tl.call(playWhoosh, [], 22)
+      .to('#scene4', { opacity: 0, duration: 0.3 }, 22)
+      .fromTo('#scene5', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 22.3)
+      .fromTo('#step1', { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, 22.6)
+      .call(playClick, [], 22.6)
+      .fromTo('#step2', { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, 23)
+      .call(playClick, [], 23)
+      .fromTo('#step3', { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, 23.4)
+      .call(playClick, [], 23.4)
+      .fromTo('#steps-text', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7 }, 23.8)
+      .to('#step1', { rotation: 10, duration: 0.3, repeat: 1, yoyo: true }, 25)
+      .to('#step2', { rotation: -10, duration: 0.3, repeat: 1, yoyo: true }, 25.2)
+      .to('#step3', { rotation: 10, duration: 0.3, repeat: 1, yoyo: true }, 25.4);
+    
+    // Scene 6: CTA (28-35s)
+    tl.call(playWhoosh, [], 28)
+      .to('#scene5', { opacity: 0, duration: 0.3 }, 28)
+      .fromTo('#scene6', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 28.3)
+      .fromTo('#cta-wordmark', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(1.4)' }, 28.6)
+      .call(playDing, [], 28.6)
+      .fromTo('#bar3', { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power3.out' }, 29.3)
+      .call(playClick, [], 29.3)
+      .fromTo('#cta-line1', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 30)
+      .fromTo('#cta-line2', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, 30.4)
+      .to('#cta-wordmark', { scale: 1.05, duration: 0.4, repeat: 1, yoyo: true }, 31);
+    
+    window.__timelines['unmindy-launch-v4'] = tl;
+  </script>
+</body>
+</html>

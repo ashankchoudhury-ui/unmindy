@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNMINDY Launch Video</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #000; color: #f5f5f5; overflow: hidden; }
+    .scene { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+    .scene-content { width: 100%; height: 100%; position: relative; }
+    
+    /* Kinetic type */
+    .kinetic-text {
+      font-size: clamp(3rem, 12vw, 8rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+    }
+    
+    /* Geometric shapes */
+    .geo-circle {
+      border: 3px solid #f5f5f5;
+      border-radius: 50%;
+      position: absolute;
+    }
+    
+    .geo-line {
+      height: 2px;
+      background: #f5f5f5;
+      position: absolute;
+    }
+    
+    .geo-square {
+      border: 2px solid #333;
+      position: absolute;
+    }
+    
+    /* Pause bars icon */
+    .pause-bars {
+      display: flex;
+      gap: 8px;
+      position: absolute;
+    }
+    
+    .pause-bar {
+      width: 12px;
+      background: #f5f5f5;
+      border-radius: 3px;
+    }
+    
+    /* Step icons */
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #f5f5f5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+    
+    /* Dim text */
+    .dim { color: #555; }
+    
+    /* Accent line */
+    .accent-line {
+      height: 3px;
+      background: #f5f5f5;
+      width: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" data-composition-id="unmindy-launch" data-duration="30">
+    <div class="scene-content" style="background: #000; padding: 4rem;">
+      
+      <!-- Scene 1: Problem stat (0-6s) -->
+      <div id="scene1" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center;">
+          <div class="kinetic-text" id="stat-text" style="opacity: 0;">147×</div>
+          <div class="accent-line" id="accent1" style="margin: 1.5rem auto;"></div>
+          <div class="dim" style="font-size: 1.2rem; letter-spacing: 0.1em; text-transform: uppercase;" id="stat-label">Daily Unlocks</div>
+        </div>
+      </div>
+
+      <!-- Scene 2: Agitation (6-12s) -->
+      <div id="scene2" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center; max-width: 800px;">
+          <div class="kinetic-text" style="font-size: clamp(2.5rem, 10vw, 6rem);">
+            Most of it<br /><span class="dim">isn't even</span><br />your choice.
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Realization (12-18s) -->
+      <div id="scene3" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center;">
+          <div class="dim" style="font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem;">The Problem</div>
+          <div class="kinetic-text" style="font-size: clamp(2rem, 8vw, 5rem);">
+            Your brain<br />is on <span style="font-weight: 900;">autopilot.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: Solution reveal (18-26s) -->
+      <div id="scene4" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center;">
+          <!-- Pause bars -->
+          <div class="pause-bars" id="pause-bars" style="justify-content: center; margin-bottom: 2rem;">
+            <div class="pause-bar" style="height: 0;"></div>
+            <div class="pause-bar" style="height: 0;"></div>
+          </div>
+          <div class="kinetic-text" id="wordmark" style="opacity: 0; font-size: clamp(2.5rem, 10vw, 7rem);">UNMINDY</div>
+          <div class="accent-line" id="accent2" style="margin: 1.5rem auto;"></div>
+          <div class="dim" style="font-size: 1rem; letter-spacing: 0.1em;">Catches you in 3 seconds</div>
+        </div>
+      </div>
+
+      <!-- Scene 5: How it works (26-30s) -->
+      <div id="scene5" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center;">
+          <div style="display: flex; gap: 3rem; justify-content: center; margin-bottom: 2rem;">
+            <div class="step-icon" id="step1" style="opacity: 0;">C</div>
+            <div class="step-icon" id="step2" style="opacity: 0;">A</div>
+            <div class="step-icon" id="step3" style="opacity: 0;">L</div>
+          </div>
+          <div class="kinetic-text" style="font-size: clamp(2rem, 8vw, 5rem); letter-spacing: -0.02em;">
+            Catch. Ask. Lock.
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 6: CTA (30-35s) -->
+      <div id="scene6" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0;">
+        <div style="text-align: center;">
+          <div class="kinetic-text" style="font-size: clamp(2.5rem, 10vw, 7rem); margin-bottom: 1rem;">UNMINDY</div>
+          <div class="accent-line" id="accent3" style="margin: 0 auto 1.5rem;"></div>
+          <div style="font-size: 1.1rem; color: #777; margin-bottom: 0.5rem;">Break the scroll.</div>
+          <div style="font-size: 0.9rem; color: #555;">landing-nine-pi-85.vercel.app</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    
+    // Scene 1: Problem stat (0-6s)
+    tl.fromTo('#scene1', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0)
+      .fromTo('#stat-text', { opacity: 0, scale: 0.5, y: 50 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.7)' }, 0.3)
+      .fromTo('#accent1', { width: 0 }, { width: 120, duration: 0.6, ease: 'power3.out' }, 1)
+      .fromTo('#stat-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, 1.5);
+    
+    // Scene 2: Agitation (6-12s)
+    tl.to('#scene1', { opacity: 0, duration: 0.4 }, 6)
+      .fromTo('#scene2', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 6.3)
+      .from('#scene2 .kinetic-text', { y: 30, opacity: 0, duration: 0.8 }, 6.5)
+      .to('#scene2 .kinetic-text', { scale: 1.02, duration: 0.3, repeat: 1, yoyo: true }, 9);
+    
+    // Scene 3: Realization (12-18s)
+    tl.to('#scene2', { opacity: 0, duration: 0.4 }, 12)
+      .fromTo('#scene3', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 12.3)
+      .from('#scene3 .dim', { opacity: 0, y: 20, duration: 0.6 }, 12.5)
+      .from('#scene3 .kinetic-text', { y: 40, opacity: 0, duration: 0.9 }, 12.8);
+    
+    // Scene 4: Solution (18-26s)
+    tl.to('#scene3', { opacity: 0, duration: 0.4 }, 18)
+      .fromTo('#scene4', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 18.3)
+      .to('#pause-bars .pause-bar:first-child', { height: 60, duration: 0.5, ease: 'back.out(2)' }, 18.6)
+      .to('#pause-bars .pause-bar:last-child', { height: 60, duration: 0.5, ease: 'back.out(2)' }, 18.9)
+      .fromTo('#wordmark', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8 }, 19.3)
+      .fromTo('#accent2', { width: 0 }, { width: 160, duration: 0.6, ease: 'power3.out' }, 20)
+      .fromTo('#scene4 .dim', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 20.5);
+    
+    // Scene 5: How it works (26-30s)
+    tl.to('#scene4', { opacity: 0, duration: 0.4 }, 26)
+      .fromTo('#scene5', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 26.3)
+      .fromTo('#step1', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 26.6)
+      .fromTo('#step2', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 27)
+      .fromTo('#step3', { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 27.4)
+      .from('#scene5 .kinetic-text', { y: 30, opacity: 0, duration: 0.7 }, 27.2);
+    
+    // Scene 6: CTA (30-35s)
+    tl.to('#scene5', { opacity: 0, duration: 0.4 }, 30)
+      .fromTo('#scene6', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 30.3)
+      .from('#scene6 .kinetic-text', { scale: 0.8, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, 30.6)
+      .fromTo('#accent3', { width: 0 }, { width: 200, duration: 0.7, ease: 'power3.out' }, 31.3)
+      .from('#scene6 div:nth-child(3)', { y: 20, opacity: 0, duration: 0.5 }, 31.8)
+      .from('#scene6 div:last-child', { y: 15, opacity: 0, duration: 0.5 }, 32.2);
+    
+    window.__timelines['unmindy-launch'] = tl;
+  </script>
+</body>
+</html>

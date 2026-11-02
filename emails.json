@@ -1,0 +1,27 @@
+[
+  {
+    "email": "test-flow@example.com",
+    "referred_by": null,
+    "timestamp": "2026-11-01T18:19:39.853Z"
+  },
+  {
+    "email": "mission-check@example.com",
+    "referred_by": null,
+    "timestamp": "2026-11-01T18:25:20.845Z"
+  },
+  {
+    "email": "test-1793585722@example.com",
+    "referred_by": null,
+    "timestamp": "2026-11-02T02:15:22.573Z"
+  },
+  {
+    "email": "test-1793613932@example.com",
+    "referred_by": null,
+    "timestamp": "2026-11-02T10:05:32.744Z"
+  },
+  {
+    "email": "test-localhost@example.com",
+    "referred_by": null,
+    "timestamp": "2026-11-02T10:20:53.690Z"
+  }
+]

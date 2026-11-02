@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LAST WATCH — Night 1/7</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=block" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background-color: #050508;
+        font-family: "Inter", sans-serif;
+        color: #f5f5f5;
+      }
+
+      #stage {
+        width: 1080px;
+        height: 1920px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      /* ========== UI CHROME ========== */
+      .ui-top-left {
+        position: absolute;
+        top: 70px;
+        left: 70px;
+        z-index: 10;
+      }
+      .ui-username {
+        font-size: 28px;
+        font-weight: 700;
+        color: #f5f5f5;
+        margin-bottom: 16px;
+        letter-spacing: 0.02em;
+      }
+      .ui-night-tag {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .ui-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #e63946;
+      }
+      .ui-night-text {
+        font-size: 32px;
+        font-weight: 700;
+        color: #e63946;
+        letter-spacing: 0.05em;
+      }
+      .ui-timestamp {
+        font-size: 140px;
+        font-weight: 900;
+        color: #f5f5f5;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 8px;
+      }
+      .ui-subtitle {
+        font-size: 32px;
+        font-weight: 700;
+        color: #ff6b35;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .ui-top-right {
+        position: absolute;
+        top: 70px;
+        right: 70px;
+        font-size: 36px;
+        font-weight: 700;
+        color: #f5f5f5;
+        opacity: 0.9;
+        z-index: 10;
+      }
+
+      /* ========== KINETIC TEXT ========== */
+      .kinetic-wrap {
+        position: absolute;
+        bottom: 180px;
+        left: 70px;
+        right: 70px;
+        z-index: 10;
+      }
+      .kinetic-line {
+        font-size: 64px;
+        font-weight: 900;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      }
+      .kinetic-line .word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      .kinetic-line.accent {
+        color: #ff6b35;
+      }
+
+      /* ========== SCENE BACKGROUNDS ========== */
+      .bg-night-sky {
+        background: linear-gradient(180deg, #0a0a1a 0%, #0f0f23 40%, #1a1a2e 100%);
+      }
+      .bg-cabin-interior {
+        background: linear-gradient(180deg, #12121a 0%, #0f0f18 100%);
+      }
+      .bg-pantry {
+        background: #0a0a12;
+      }
+      .bg-tower-platform {
+        background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 60%, #12121a 100%);
+      }
+      .bg-blackout {
+        background: #030308;
+      }
+
+      /* ========== MOON ========== */
+      .moon {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, #f5f5dc 0%, #e8e4c9 50%, #c9c4a8 100%);
+        box-shadow: 0 0 80px rgba(245, 245, 220, 0.3), 0 0 160px rgba(245, 245, 220, 0.15);
+      }
+      .moon-glow {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(245, 245, 220, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      /* ========== TOWER ========== */
+      .tower {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 900px;
+        background: #1a1a24;
+        border-radius: 10px 10px 0 0;
+      }
+      .tower-lattice {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 40px,
+          #2a2a3a 40px,
+          #2a2a3a 44px
+        );
+        opacity: 0.3;
+      }
+      .tower-cabin {
+        position: absolute;
+        top: 100px;
+        left: -50px;
+        width: 400px;
+        height: 250px;
+        background: #1f1f2e;
+        border-radius: 20px;
+        border: 6px solid #2a2a3a;
+      }
+      .tower-window {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 107, 53, 0.5);
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(255, 107, 53, 0.4), inset 0 0 20px rgba(255, 160, 60, 0.3);
+      }
+      .tower-door {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 180px;
+        background: #0a0a14;
+        border-radius: 10px 10px 0 0;
+        border: 4px solid #2a2a3a;
+      }
+
+      /* ========== CHARACTER ========== */
+      .character {
+        position: absolute;
+        z-index: 5;
+      }
+      .char-head {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        background: #e8d5c4;
+        border-radius: 50%;
+      }
+      .char-beanie {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 50px;
+        background: #e63946;
+        border-radius: 45px 45px 20px 20px;
+      }
+      .char-jacket {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 180px;
+        background: #4a7c59;
+        border-radius: 30px 30px 20px 20px;
+      }
+      .char-pants {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 130px;
+        height: 100px;
+        background: #2a2a3a;
+        border-radius: 0 0 15px 15px;
+      }
+
+      /* ========== TREES ========== */
+      .tree {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 120px solid #0a0a14;
+      }
+
+      /* ========== STARS ========== */
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #f5f5f5;
+        border-radius: 50%;
+      }
+
+      /* ========== FIREFLIES ========== */
+      .firefly {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #ffeb3b;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 235, 59, 0.6);
+      }
+
+      /* ========== CABIN INTERIOR ========== */
+      .cabin-wall {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        background: #12121a;
+      }
+      .cabin-window {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 500px;
+        height: 400px;
+        background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+        border-radius: 20px;
+        border: 8px solid #2a2a3a;
+        overflow: hidden;
+      }
+      .cabin-interior-glow {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+      }
+
+      /* ========== LANTERN ========== */
+      .lantern {
+        position: absolute;
+        width: 60px;
+        height: 80px;
+        background: #2a2a3a;
+        border-radius: 10px;
+        border: 3px solid #3a3a4a;
+      }
+      .lantern-flame {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 30px;
+        background: #ff6b35;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+      }
+      .lantern-glow {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255, 160, 60, 0.4) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      /* ========== RADIO ========== */
+      .radio {
+        position: absolute;
+        width: 300px;
+        height: 180px;
+        background: #1a1a24;
+        border-radius: 15px;
+        border: 4px solid #2a2a3a;
+      }
+      .radio-screen {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 120px;
+        height: 80px;
+        background: #0a0a14;
+        border-radius: 8px;
+        border: 2px solid #3a3a4a;
+      }
+      .radio-screen-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 32px;
+        font-weight: 900;
+        color: #4a9eff;
+        letter-spacing: 0.1em;
+      }
+      .radio-knob {
+        position: absolute;
+        top: 50px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+        background: #3a3a4a;
+        border-radius: 50%;
+        border: 3px solid #2a2a3a;
+      }
+
+      /* ========== NOTEBOOK ========== */
+      .notebook {
+        position: absolute;
+        width: 200px;
+        height: 260px;
+        background: #5c4033;
+        border-radius: 10px;
+        border: 4px solid #3a2a1e;
+        transform: rotate(-5deg);
+      }
+      .notebook-cover {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        font-size: 36px;
+        font-weight: 900;
+        color: #d4af37;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      /* ========== RULE CARD ========== */
+      .rule-card {
+        position: absolute;
+        padding: 20px 30px;
+        background: #e63946;
+        border-radius: 10px;
+        font-size: 28px;
+        font-weight: 900;
+        color: #f5f5f5;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      /* ========== PANTRY ========== */
+      .shelf {
+        position: absolute;
+        left: 100px;
+        width: 800px;
+        height: 20px;
+        background: #2a2a3a;
+        border-radius: 3px;
+      }
+      .can {
+        position: absolute;
+        width: 70px;
+        height: 100px;
+        background: #c0c0c0;
+        border-radius: 8px 8px 3px 3px;
+        border: 2px solid #a0a0a0;
+      }
+      .can-label {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        right: 10px;
+        height: 40px;
+        background: #ff6b35;
+        border-radius: 3px;
+      }
+      .can-label-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        font-weight: 900;
+        color: #f5f5f5;
+        letter-spacing: 0.05em;
+      }
+
+      /* ========== FLASHLIGHT BEAM ========== */
+      .flashlight-beam {
+        position: absolute;
+        width: 150px;
+        height: 400px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+        clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+        pointer-events: none;
+      }
+
+      /* ========== PADLOCK ========== */
+      .padlock {
+        position: absolute;
+        width: 80px;
+        height: 100px;
+        background: #ffd700;
+        border-radius: 10px 10px 5px 5px;
+        border: 4px solid #d4af37;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      }
+      .padlock-shackle {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 40px;
+        border: 6px solid #d4af37;
+        border-bottom: none;
+        border-radius: 25px 25px 0 0;
+      }
+
+      /* ========== TRAPDOOR ========== */
+      .trapdoor-frame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 500px;
+        background: #1a1a24;
+        border-radius: 20px;
+        border: 8px solid #2a2a3a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .trapdoor-circle {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #2a2a3a 0%, #1a1a24 100%);
+        border: 4px solid #3a3a4a;
+      }
+
+      /* ========== HEARTBEAT PULSE ========== */
+      #heartbeat-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+        opacity: 0;
+        z-index: 50;
+      }
+
+      /* ========== FADE OVERLAY ========== */
+      #fade-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #050508;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      /* ========== AUDIO ========== */
+      #narration {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage" data-composition-id="last-watch" data-start="0" data-duration="60" data-width="1080" data-height="1920">
+      <audio id="narration" data-start="0" data-duration="60" data-track-index="0" src="assets/narration-timed.wav"></audio>
+      <div id="fade-overlay"></div>
+      <div id="heartbeat-overlay"></div>
+
+      <!-- ==================== SCENE 1: NIGHT 1/7 — THE ARRIVAL (0:00–0:08) ==================== -->
+      <div id="scene-1" class="scene bg-night-sky">
+        <!-- Moon -->
+        <div class="moon-glow" style="top: 80px; right: 80px; width: 600px; height: 600px;"></div>
+        <div class="moon" style="top: 120px; right: 120px; width: 350px; height: 350px;"></div>
+        
+        <!-- Stars -->
+        <div class="star" style="top: 60px; left: 120px;"></div>
+        <div class="star" style="top: 140px; left: 320px;"></div>
+        <div class="star" style="top: 100px; left: 620px;"></div>
+        <div class="star" style="top: 220px; left: 820px;"></div>
+        <div class="star" style="top: 180px; left: 920px;"></div>
+        <div class="star" style="top: 300px; left: 200px;"></div>
+        <div class="star" style="top: 250px; left: 500px;"></div>
+        
+        <!-- Trees -->
+        <div class="tree" style="left: 40px;"></div>
+        <div class="tree" style="left: 140px; border-bottom-width: 160px;"></div>
+        <div class="tree" style="left: 240px;"></div>
+        <div class="tree" style="right: 40px;"></div>
+        <div class="tree" style="right: 140px; border-bottom-width: 160px;"></div>
+        <div class="tree" style="right: 240px;"></div>
+        
+        <!-- Tower -->
+        <div class="tower">
+          <div class="tower-lattice"></div>
+          <div class="tower-cabin">
+            <div class="tower-window"></div>
+          </div>
+          <div class="tower-door"></div>
+        </div>
+        
+        <!-- Character climbing stairs -->
+        <div class="character" style="bottom: 80px; left: 50%; transform: translateX(-50%);">
+          <div class="char-beanie"></div>
+          <div class="char-head"></div>
+          <div class="char-jacket"></div>
+          <div class="char-pants"></div>
+        </div>
+        
+        <!-- Fireflies -->
+        <div class="firefly" style="bottom: 250px; left: 200px;"></div>
+        <div class="firefly" style="bottom: 350px; left: 400px;"></div>
+        <div class="firefly" style="bottom: 200px; right: 300px;"></div>
+        <div class="firefly" style="bottom: 300px; left: 600px;"></div>
+        <div class="firefly" style="bottom: 400px; right: 400px;"></div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">1:52 AM</div>
+        </div>
+        <div class="ui-top-right">1:00</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="IMAGINE YOU'RE A"></div>
+          <div class="kinetic-line accent" data-text="FOREST RANGER."></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 2: NIGHT 1/7 — THE HABIT (0:08–0:16) ==================== -->
+      <div id="scene-2" class="scene bg-cabin-interior">
+        <div class="cabin-wall"></div>
+        
+        <!-- Window showing night -->
+        <div class="cabin-window">
+          <div class="cabin-interior-glow"></div>
+        </div>
+        
+        <!-- Lantern -->
+        <div class="lantern-glow" style="bottom: 300px; right: 200px;"></div>
+        <div class="lantern" style="bottom: 280px; right: 180px;">
+          <div class="lantern-flame"></div>
+        </div>
+        
+        <!-- Radio -->
+        <div class="radio" style="bottom: 200px; left: 50%; transform: translateX(-50%);">
+          <div class="radio-screen">
+            <div class="radio-screen-text" id="radio-ch9">CH 09</div>
+          </div>
+          <div class="radio-knob"></div>
+        </div>
+        
+        <!-- Character at desk -->
+        <div class="character" style="bottom: 150px; left: 50%; transform: translateX(-50%);">
+          <div class="char-beanie"></div>
+          <div class="char-head"></div>
+          <div class="char-jacket"></div>
+          <div class="char-pants"></div>
+        </div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">1:53 AM</div>
+        </div>
+        <div class="ui-top-right">0:50</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="RANGER STATION."></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 3: NIGHT 1/7 — THE DISCOVERY (0:16–0:24) ==================== -->
+      <div id="scene-3" class="scene bg-cabin-interior">
+        <div class="cabin-wall"></div>
+        
+        <!-- Notebook -->
+        <div class="notebook" style="bottom: 200px; left: 50%; transform: translateX(-50%) rotate(-5deg);">
+          <div class="notebook-cover">RULES</div>
+        </div>
+        
+        <!-- Character -->
+        <div class="character" style="bottom: 150px; left: 50%; transform: translateX(-50%);">
+          <div class="char-beanie"></div>
+          <div class="char-head"></div>
+          <div class="char-jacket"></div>
+          <div class="char-pants"></div>
+        </div>
+        
+        <!-- Rule card -->
+        <div class="rule-card" style="bottom: 500px; left: 50%; transform: translateX(-50%);">
+          RULE #1 — KEEP THE LIGHT OFF
+        </div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">1:54 AM</div>
+        </div>
+        <div class="ui-top-right">0:41</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="PICKUP IN 7 DAYS"></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 4: NIGHT 1/7 — THE VIOLATION (0:24–0:32) ==================== -->
+      <div id="scene-4" class="scene bg-cabin-interior">
+        <div class="cabin-wall"></div>
+        
+        <!-- Window -->
+        <div class="cabin-window">
+          <div class="cabin-interior-glow"></div>
+        </div>
+        
+        <!-- Lantern lit -->
+        <div class="lantern-glow" style="bottom: 400px; left: 200px;"></div>
+        <div class="lantern" style="bottom: 380px; left: 180px;">
+          <div class="lantern-flame"></div>
+        </div>
+        
+        <!-- Character at window -->
+        <div class="character" style="bottom: 250px; left: 50%; transform: translateX(-50%);">
+          <div class="char-beanie"></div>
+          <div class="char-head"></div>
+          <div class="char-jacket"></div>
+          <div class="char-pants"></div>
+        </div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">1:55 AM</div>
+        </div>
+        <div class="ui-top-right">0:37</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="RULE #2 — IF THE LIGHT IS ON,"></div>
+          <div class="kinetic-line accent" data-text="THEY CAN SEE YOU."></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 5: NIGHT 1/7 — THE CONSEQUENCE (0:32–0:40) ==================== -->
+      <div id="scene-5" class="scene bg-night-sky">
+        <div class="moon-glow" style="top: 60px; right: 100px; width: 500px; height: 500px;"></div>
+        <div class="moon" style="top: 100px; right: 140px; width: 280px; height: 280px;"></div>
+        
+        <!-- Tower -->
+        <div class="tower" style="height: 700px;">
+          <div class="tower-lattice"></div>
+          <div class="tower-cabin" style="top: 80px;">
+            <div class="tower-window"></div>
+          </div>
+        </div>
+        
+        <!-- Flashlight beams from below -->
+        <div class="flashlight-beam" style="bottom: 0; left: 200px; transform: rotate(-15deg);"></div>
+        <div class="flashlight-beam" style="bottom: 0; right: 200px; transform: rotate(15deg);"></div>
+        
+        <!-- Figures below -->
+        <div class="character" style="bottom: 50px; left: 180px; transform: scale(0.7);">
+          <div class="char-beanie" style="background: #2a2a3a;"></div>
+          <div class="char-head" style="background: #3a3a4a;"></div>
+          <div class="char-jacket" style="background: #2a2a3a;"></div>
+          <div class="char-pants" style="background: #1a1a24;"></div>
+        </div>
+        <div class="character" style="bottom: 50px; right: 180px; transform: scale(0.7);">
+          <div class="char-beanie" style="background: #2a2a3a;"></div>
+          <div class="char-head" style="background: #3a3a4a;"></div>
+          <div class="char-jacket" style="background: #2a2a3a;"></div>
+          <div class="char-pants" style="background: #1a1a24;"></div>
+        </div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">2:13 AM</div>
+        </div>
+        <div class="ui-top-right">0:27</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="START TO CREAK."></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 6: NIGHT 1/7 — THE CHOICE (0:40–0:48) ==================== -->
+      <div id="scene-6" class="scene bg-tower-platform">
+        <div class="moon-glow" style="top: 80px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px;"></div>
+        <div class="moon" style="top: 120px; left: 50%; transform: translateX(-50%); width: 280px; height: 280px;"></div>
+        
+        <!-- Platform -->
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; background: #12121a;"></div>
+        <div style="position: absolute; bottom: 30%; left: 0; width: 100%; height: 8px; background: #2a2a3a;"></div>
+        
+        <!-- Character on platform -->
+        <div class="character" style="bottom: 35%; left: 50%; transform: translateX(-50%);">
+          <div class="char-beanie"></div>
+          <div class="char-head"></div>
+          <div class="char-jacket"></div>
+          <div class="char-pants"></div>
+        </div>
+        
+        <!-- Miner below -->
+        <div class="character" style="bottom: 5%; right: 15%; transform: scale(0.8);">
+          <div class="char-beanie" style="background: #ffd700;"></div>
+          <div class="char-head" style="background: #e8d5c4;"></div>
+          <div class="char-jacket" style="background: #ff6b35;"></div>
+          <div class="char-pants" style="background: #2a2a3a;"></div>
+        </div>
+        
+        <!-- Padlock -->
+        <div class="padlock" style="bottom: 35%; left: 30%;">
+          <div class="padlock-shackle"></div>
+        </div>
+        
+        <!-- Flashlight beam from miner -->
+        <div class="flashlight-beam" style="bottom: 10%; right: 10%; transform: rotate(-30deg);"></div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">2:14 AM</div>
+        </div>
+        <div class="ui-top-right">0:17</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="FROM THE STATION."></div>
+        </div>
+      </div>
+
+      <!-- ==================== SCENE 7: NIGHT 1/7 — THE CLIFFHANGER (0:48–0:56) ==================== -->
+      <div id="scene-7" class="scene bg-blackout">
+        <!-- Red glow -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%); pointer-events: none;"></div>
+        
+        <!-- Trapdoor -->
+        <div class="trapdoor-frame">
+          <div class="trapdoor-circle"></div>
+        </div>
+        
+        <!-- Character silhouette -->
+        <div class="character" style="bottom: 200px; left: 50%; transform: translateX(-50%); opacity: 0.6;">
+          <div class="char-beanie" style="background: #1a1a24;"></div>
+          <div class="char-head" style="background: #2a2a3a;"></div>
+          <div class="char-jacket" style="background: #1a1a24;"></div>
+          <div class="char-pants" style="background: #0a0a14;"></div>
+        </div>
+        
+        <div class="ui-top-left">
+          <div class="ui-night-tag"><div class="ui-dot"></div><div class="ui-night-text">NIGHT 1/7</div></div>
+          <div class="ui-timestamp">2:15 AM</div>
+        </div>
+        <div class="ui-top-right">0:07</div>
+        
+        <div class="kinetic-wrap">
+          <div class="kinetic-line" data-text="DO YOU"></div>
+          <div class="kinetic-line accent" data-text="OPEN THE TRAPDOOR?"></div>
+        </div>
+      </div>
+
+      <!-- ==================== OUTRO (0:56–1:00) ==================== -->
+      <div id="scene-8" class="scene" style="background: #050508;">
+        <div class="moon-glow" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 400px;"></div>
+        <div class="moon" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px;"></div>
+        
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10;">
+          <div style="font-size: 48px; font-weight: 900; color: #f5f5f5; letter-spacing: 0.2em; margin-bottom: 20px;">LAST WATCH</div>
+          <div style="font-size: 32px; font-weight: 700; color: #f5f5f5; letter-spacing: 0.1em; margin-bottom: 40px;">FOLLOW FOR</div>
+          <div style="font-size: 80px; font-weight: 900; color: #ff6b35; letter-spacing: 0.05em;">NIGHT 2</div>
+          <div style="font-size: 36px; font-weight: 700; color: #f5f5f5; letter-spacing: 0.15em; margin-top: 20px; opacity: 0.7;">THE ANSWER.</div>
+        </div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true, defaults: { duration: 0.6 } });
+
+        // Fade in from black
+        tl.set("#fade-overlay", { opacity: 1 }, 0);
+        tl.to("#fade-overlay", { opacity: 0, duration: 2, ease: "power2.out" }, 0);
+
+        // Scene timings
+        const scenes = [
+          { id: "scene-1", start: 2, duration: 8 },
+          { id: "scene-2", start: 10, duration: 8 },
+          { id: "scene-3", start: 18, duration: 8 },
+          { id: "scene-4", start: 26, duration: 8 },
+          { id: "scene-5", start: 34, duration: 8 },
+          { id: "scene-6", start: 42, duration: 8 },
+          { id: "scene-7", start: 50, duration: 8 },
+          { id: "scene-8", start: 58, duration: 4 }
+        ];
+
+        // ========== KINETIC TEXT SYSTEM ==========
+        function setupKineticText() {
+          document.querySelectorAll('.kinetic-line').forEach(line => {
+            const text = line.getAttribute('data-text');
+            if (!text) return;
+            const words = text.split(' ');
+            line.innerHTML = '';
+            words.forEach((word, i) => {
+              const span = document.createElement('span');
+              span.className = 'word';
+              span.textContent = word;
+              line.appendChild(span);
+              if (i < words.length - 1) {
+                line.appendChild(document.createTextNode(' '));
+              }
+            });
+          });
+        }
+        setupKineticText();
+
+        // ========== SCENE ANIMATIONS ==========
+        const sceneIds = ["scene-1", "scene-2", "scene-3", "scene-4", "scene-5", "scene-6", "scene-7", "scene-8"];
+        sceneIds.forEach((id, i) => {
+          const s = scenes[i];
+          // Scene entrance
+          tl.to(`#${id}`, { opacity: 1, duration: 0.8, ease: "power2.out" }, s.start);
+          
+          // Kinetic text entrance
+          const kineticLines = document.querySelectorAll('#' + id + ' .kinetic-line');
+          kineticLines.forEach((line, lineIndex) => {
+            const words = line.querySelectorAll('.word');
+            const baseDelay = s.start + 0.3 + lineIndex * 0.4;
+            words.forEach((word, wordIndex) => {
+              tl.to(word, { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.3, 
+                ease: "back.out(1.4)" 
+              }, baseDelay + wordIndex * 0.15);
+            });
+          });
+          
+          // UI entrance
+          tl.from(`#${id} .ui-timestamp`, { y: 40, opacity: 0, duration: 0.7, ease: "power3.out" }, s.start + 0.2);
+          tl.from(`#${id} .ui-night-tag`, { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, s.start + 0.1);
+          
+          // Character idle animation
+          const charEl = document.querySelector('#' + id + ' .character');
+          if (charEl) {
+            tl.from(`#${id} .character`, { y: 30, opacity: 0, duration: 0.8, ease: "power2.out" }, s.start + 0.3);
+            // Subtle breathing
+            tl.to(`#${id} .character`, { y: -5, duration: 2, ease: "sine.inOut", repeat: 1, yoyo: true }, s.start + 1);
+          }
+          
+          // Scene exit
+          if (i < sceneIds.length - 1) {
+            tl.to(`#${id}`, { opacity: 0, duration: 0.8, ease: "power2.in" }, s.start + s.duration - 0.8);
+          }
+        });
+
+        // ========== CONTINUOUS EFFECTS (deterministic, finite repeats) ==========
+        
+        // Precomputed deterministic values for fireflies
+        const fireflyData = [
+          { dx: -45, dy: -35, oStart: 0.4, dur: 4.2 },
+          { dx: 55, dy: 25, oStart: 0.7, dur: 5.1 },
+          { dx: -20, dy: -60, oStart: 0.5, dur: 3.8 },
+          { dx: 70, dy: -10, oStart: 0.3, dur: 4.7 },
+          { dx: -60, dy: 40, oStart: 0.6, dur: 5.5 }
+        ];
+        const fireflyTl = gsap.timeline({ paused: true, repeat: 14 });
+        document.querySelectorAll('#scene-1 .firefly').forEach((f, i) => {
+          const d = fireflyData[i] || { dx: 0, dy: 0, oStart: 0.5, dur: 4 };
+          fireflyTl.to(f, {
+            x: d.dx,
+            y: d.dy,
+            opacity: d.oStart,
+            duration: d.dur,
+            ease: "sine.inOut",
+            repeat: 14,
+            yoyo: true
+          }, i * 0.5);
+        });
+        
+        // Star twinkle with deterministic values
+        const starData = [
+          { oStart: 0.3, dur: 1.7 },
+          { oStart: 0.6, dur: 2.3 },
+          { oStart: 0.4, dur: 1.9 },
+          { oStart: 0.7, dur: 2.1 },
+          { oStart: 0.5, dur: 1.5 },
+          { oStart: 0.3, dur: 2.7 },
+          { oStart: 0.6, dur: 1.3 }
+        ];
+        const starTl = gsap.timeline({ paused: true, repeat: 14 });
+        document.querySelectorAll('.star').forEach((s, i) => {
+          const d = starData[i] || { oStart: 0.5, dur: 2 };
+          starTl.to(s, {
+            opacity: d.oStart,
+            duration: d.dur,
+            ease: "sine.inOut",
+            repeat: 14,
+            yoyo: true
+          }, i * 0.3);
+        });
+        
+        // Lantern flicker (scenes 2, 4) — deterministic
+        const lanternTl = gsap.timeline({ paused: true, repeat: 14 });
+        document.querySelectorAll('.lantern-flame').forEach((flame, i) => {
+          const scaleVal = 0.9 + (i * 0.05);
+          const opVal = 0.75 + (i * 0.05);
+          const durVal = 0.6 + (i * 0.3);
+          lanternTl.to(flame, {
+            scale: scaleVal,
+            opacity: opVal,
+            duration: durVal,
+            ease: "sine.inOut",
+            repeat: 14,
+            yoyo: true
+          }, 0);
+        });
+        
+        // Radio static flicker — deterministic
+        const radioTl = gsap.timeline({ paused: true, repeat: 14 });
+        const radioText = document.getElementById('radio-ch9');
+        if (radioText) {
+          radioTl.to(radioText, {
+            opacity: 0.6,
+            duration: 0.5,
+            ease: "steps(1)",
+            repeat: 14,
+            yoyo: true
+          }, 0);
+        }
+        
+        // Flashlight beam sway — deterministic
+        const beamTl = gsap.timeline({ paused: true, repeat: 14 });
+        document.querySelectorAll('.flashlight-beam').forEach((beam, i) => {
+          const xVal = -15 + (i * 10);
+          const opVal = 0.25 + (i * 0.05);
+          const durVal = 2.5 + (i * 0.5);
+          beamTl.to(beam, {
+            x: xVal,
+            opacity: opVal,
+            duration: durVal,
+            ease: "sine.inOut",
+            repeat: 14,
+            yoyo: true
+          }, i * 1);
+        });
+        
+        // Heartbeat pulse (scene 7) — finite 12 beats over 8s
+        const heartbeatTl = gsap.timeline({ paused: true, repeat: 7 });
+        for (let b = 0; b < 8; b++) {
+          const baseTime = b * 1;
+          heartbeatTl.to("#heartbeat-overlay", { opacity: 0.6, scale: 1.05, duration: 0.3, ease: "power2.out" }, baseTime);
+          heartbeatTl.to("#heartbeat-overlay", { opacity: 0, scale: 1, duration: 0.5, ease: "power2.in" }, baseTime + 0.3);
+        }
+
+        // Main timeline
+        window.__timelines["last-watch"] = tl;
+      </script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+file 'ch1-pad.wav'
+file 'ch2-pad.wav'
+file 'ch3-pad.wav'
+file 'ch4-pad.wav'
+file 'ch5-pad.wav'
+file 'ch6-pad.wav'
+file 'ch7-pad.wav'

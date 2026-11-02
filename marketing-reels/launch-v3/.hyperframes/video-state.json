@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "historyId": "1b361092-6405-459d-b9db-c568b90444a6",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "index.html": {
+      "hash": "790170eafbc2d55fc70c885df048bdc71cae4c049bf932d7cb51924c8f7510de",
+      "content": "/home/bryan/.cache/hyperframes/history/1b361092-6405-459d-b9db-c568b90444a6/blobs/79/790170eafbc2d55fc70c885df048bdc71cae4c049bf932d7cb51924c8f7510de"
+    },
+    "assets/narration-timed.wav": {
+      "hash": "290a69a600119c20cc8f49dacb454d064ce91d5d4ab7aa9a8c49c606a187449d",
+      "content": "/home/bryan/.cache/hyperframes/history/1b361092-6405-459d-b9db-c568b90444a6/blobs/29/290a69a600119c20cc8f49dacb454d064ce91d5d4ab7aa9a8c49c606a187449d"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "03378462-5d7a-4b9a-adde-10f2cb821191",
+      "completedAt": 1793374733121,
+      "output": "/home/bryan/unmindy/marketing-reels/launch-v3/unmindy-launch-v3.mp4",
+      "status": "completed",
+      "revision": null
+    },
+    "retainedRevisions": []
+  },
+  "pendingArtifactCleanup": []
+}

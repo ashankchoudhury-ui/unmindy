@@ -4,7 +4,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from datetime import datetime
 
 DATA_FILE = "/home/bryan/unmindy/emails.json"
-PORT = 8080
+PORT = 8083
 
 class EmailHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):

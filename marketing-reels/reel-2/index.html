@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reel 2: The Interrupt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #000; color: #f5f5f5; overflow: hidden; }
+    .scene { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+    .scene-content { width: 100%; height: 100%; position: relative; }
+    .overlay { position: absolute; inset: 0; background: #f5f5f5; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    .lock-btn { background: #000; color: #f5f5f5; padding: 0.8rem 2rem; border-radius: 999px; font-weight: 700; font-size: 0.9rem; margin-top: 1.5rem; }
+    .timer { font-size: 5rem; font-weight: 900; color: #000; letter-spacing: -0.04em; line-height: 1; }
+  </style>
+</head>
+<body>
+  <div class="scene" data-composition-id="reel-2-interrupt" data-duration="15">
+    <div class="scene-content" style="background: #000;">
+      <div id="scene1" style="width: 100%; height: 100%; position: relative;">
+        <div style="padding: 40px 20px;">
+          <div style="height: 14px; background: #1a1a1a; border-radius: 7px; margin-bottom: 12px; width: 80%;"></div>
+          <div style="height: 14px; background: #1a1a1a; border-radius: 7px; margin-bottom: 12px; width: 60%;"></div>
+          <div style="height: 14px; background: #1a1a1a; border-radius: 7px; margin-bottom: 12px; width: 90%;"></div>
+          <div style="height: 14px; background: #1a1a1a; border-radius: 7px; margin-bottom: 12px; width: 70%;"></div>
+        </div>
+        <div style="position: absolute; bottom: 60px; left: 20px; right: 20px;">
+          <div style="font-size: 0.85rem; color: #555;">You ever open an app without deciding to?</div>
+        </div>
+      </div>
+      <div class="overlay" id="scene2" style="opacity: 0;">
+        <div style="font-size: 1.5rem; font-weight: 800; color: #000; letter-spacing: -0.02em;">LOCK IN FOR 15 MINUTES?</div>
+        <div style="font-size: 0.9rem; color: #555; margin-top: 0.5rem;">No social media. No distractions.</div>
+        <div class="lock-btn">Commit</div>
+      </div>
+      <div class="overlay" id="scene3" style="opacity: 0; background: #000;">
+        <div class="timer" id="timer">15:00</div>
+        <div style="font-size: 0.85rem; color: #555; margin-top: 1rem;">Stay focused</div>
+      </div>
+      <div class="overlay" id="scene4" style="opacity: 0; background: #f5f5f5;">
+        <div style="font-size: 1.5rem; font-weight: 900; color: #000; letter-spacing: -0.02em;">UNMINDY</div>
+        <div style="font-size: 0.9rem; color: #555; margin-top: 0.5rem;">The interrupt that breaks the scroll.</div>
+        <div style="font-size: 0.8rem; color: #777; margin-top: 1.5rem;">Waitlist in bio ↓</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    tl.from('#scene1', { opacity: 0, duration: 1 })
+      .to('#scene1 > div:first-child > div', { opacity: 0.4, duration: 0.4, stagger: 0.15, repeat: 1, yoyo: true }, 1);
+    tl.to('#scene1', { opacity: 0, duration: 0.3 }, 5)
+      .fromTo('#scene2', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 5.2)
+      .from('#scene2 > div:first-child', { scale: 0.8, opacity: 0, duration: 0.5 }, 5.5)
+      .from('#scene2 > div:nth-child(2)', { y: 10, opacity: 0, duration: 0.4 }, 5.8)
+      .from('#scene2 .lock-btn', { scale: 0.9, opacity: 0, duration: 0.3 }, 6)
+      .to('#scene2', { opacity: 0, duration: 0.4 }, 9);
+    tl.fromTo('#scene3', { opacity: 0 }, { opacity: 1, duration: 0.5 }, 10)
+      .from('#timer', { scale: 0.5, opacity: 0, duration: 0.6 }, 10.3)
+      .to('#scene3', { opacity: 0, duration: 0.5 }, 12);
+    tl.fromTo('#scene4', { opacity: 0 }, { opacity: 1, duration: 0.8 }, 12.2)
+      .from('#scene4 > div:first-child', { y: 20, opacity: 0, duration: 0.6 }, 12.5)
+      .from('#scene4 > div:nth-child(2)', { y: 15, opacity: 0, duration: 0.5 }, 12.8)
+      .from('#scene4 > div:nth-child(3)', { y: 10, opacity: 0, duration: 0.4 }, 13.1);
+    window.__timelines['reel-2-interrupt'] = tl;
+  </script>
+</body>
+</html>
