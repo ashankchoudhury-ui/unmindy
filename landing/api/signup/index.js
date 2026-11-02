@@ -1,6 +1,6 @@
-const { put, get } = require('@vercel/blob');
+const { put, list, get } = require('@vercel/blob');
 
-const BLOB_KEY = 'signups.json';
+const BLOB_PREFIX = 'signups/';
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -16,6 +16,7 @@ module.exports = async function handler(req, res) {
 
     const normalizedEmail = email.toLowerCase().trim();
     const timestamp = new Date().toISOString();
+    const id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 
     const registration = {
       email: normalizedEmail,
@@ -26,55 +27,56 @@ module.exports = async function handler(req, res) {
     };
 
     try {
-      // Get existing signups
-      let signups = [];
-      
+      // Check for duplicates using list
+      console.log('Checking for duplicates...');
+      let existing = [];
       try {
-        console.log('Attempting to get existing signups from Blob...');
-        const existing = await get(BLOB_KEY, { access: 'private' });
-        console.log('Get result status:', existing.statusCode);
-        
-        if (existing && existing.statusCode === 200 && existing.stream) {
-          const chunks = [];
-          for await (const chunk of existing.stream) {
-            chunks.push(chunk);
-          }
-          const text = Buffer.concat(chunks).toString('utf8');
-          console.log('Existing content length:', text.length);
-          signups = JSON.parse(text);
-          if (!Array.isArray(signups)) signups = [];
-        }
-      } catch (getError) {
-        console.log('Get error:', getError.message);
-        // File doesn't exist yet, start fresh
-        signups = [];
+        const listResult = await list({ prefix: BLOB_PREFIX, limit: 100 });
+        existing = listResult.blobs || [];
+        console.log('List result:', existing.length, 'blobs found');
+      } catch (listError) {
+        console.log('List error:', listError.message);
+        // Continue with empty list
       }
 
-      // Check for duplicates
-      const isDuplicate = signups.some(s => s.email === normalizedEmail);
-      console.log('Duplicate check:', isDuplicate, 'signups count:', signups.length);
+      // Check each existing signup for duplicates
+      const isDuplicate = await Promise.any(existing.map(async (blob) => {
+        try {
+          const result = await get(blob.pathname, { access: 'private' });
+          if (result && result.stream) {
+            const chunks = [];
+            for await (const chunk of result.stream) {
+              chunks.push(chunk);
+            }
+            const text = Buffer.concat(chunks).toString('utf8');
+            const data = JSON.parse(text);
+            return data.email === normalizedEmail;
+          }
+          return false;
+        } catch (e) {
+          return false;
+        }
+      }));
+
       if (isDuplicate) {
+        console.log('Duplicate found');
         return res.status(200).json({ ok: true, message: 'Already registered' });
       }
 
-      // Add new signup
-      signups.push(registration);
-
-      // Save back to Blob with overwrite allowed
-      const newContent = JSON.stringify(signups, null, 2);
-      console.log('Saving signups:', newContent.length, 'bytes');
+      // Save new registration
+      const blobKey = `${BLOB_PREFIX}${id}.json`;
+      console.log('Saving to:', blobKey);
       
-      await put(BLOB_KEY, newContent, {
+      await put(blobKey, JSON.stringify(registration), {
         access: 'private',
-        contentType: 'application/json',
-        allowOverwrite: true
+        contentType: 'application/json'
       });
 
       return res.status(200).json({ 
         ok: true, 
         code: 'sprint-' + Math.random().toString(36).substr(2, 5),
         message: 'Registration successful',
-        total: signups.length
+        total: existing.length + 1
       });
 
     } catch (blobError) {
